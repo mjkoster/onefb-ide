@@ -1,0 +1,26 @@
+{
+  "info": {
+    "title": "OneFB Sensing function", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+
+  "sdfObject": {
+    "Sensor": {
+      "description": "Sensing function",
+      "label": "Sensor",
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "The most recently measured value available",
+          "label": "Current Measured Value",
+          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+        }
+      }
+    }
+  }
+}

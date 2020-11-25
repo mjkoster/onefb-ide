@@ -1,0 +1,106 @@
+{
+  "info": {
+    "title": "Actuator with PWM option", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+
+  "sdfObject": {
+    "PwmActuator": {
+      "description": "Actuation with PWM option",
+      "label": "PWM Actuator",
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "The most recently updated output state value",
+          "label": "Current Output Value",
+          "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+        },
+        "OutputMode": {
+          "description": "The mode of the output, analog or PWM",
+          "label": "Output Mode",
+          "sdfRef": "#/sdfObject/pwmActuator/sdfData/OutputModeData"
+        },
+        "PwmFrequency": {
+          "description": "PWM Frequency",
+          "label": "PWM Frequency",
+          "sdfRef": "#/sdfObject/pwmActuator/sdfData/PwmFrequency"
+        }
+      },
+      "sdfAction": {
+        "SetCurrentValue": {
+          "description": "Set the current output value of the actuator",
+          "label": "Set Current Value",
+          "InputData": {
+            "type": "object",
+            "required": [ "TargetValue" ],
+            "properties": {
+              "TargetValue": {
+                "description": "Target Output Value",
+                "label": "Target Output Value",
+                "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+              },
+              "TransitionTime": {
+                "description": "Move the actuator output smoothly from the current value to the target value",
+                "label": "Transition Time",
+                "sdfRef": "fb:#/sdfData/TransionTimeType"
+              }
+            }
+          }
+        },
+        "SetOutputMode": {
+          "description": "Set the output mode to one of the available modes",
+          "label": "Set Output Mode",
+          "InputData": {
+            "type": "object",
+            "properties": {
+              "OutputMode": {
+                "sdfRef": "#/sdfObject/pwmActuator/sdfData/OutputModeData"
+              }
+            }
+          }
+        },
+        "SetPwmFrequency": {
+          "description": "Try to set the PWM Frequency, device may set to an approximate value",
+          "label": "Set PWM Frequency",
+          "InputData": {
+            "type": "object",
+            "properties": {
+              "TargetPwmFrequency": {
+                "description": "Target PWM Frequency",
+                "label": "Target PWM Frequency",
+                "sdfRef": "#/sdfObject/pwmActuator/sdfData/PwmFrequency"
+              }
+            }
+          }
+        }
+      },
+      "sdfData": {
+        "OutputModeData": {
+          "description": "The mode of the output",
+          "label": "Output Mode",
+          "sdfChoice": {
+            "AnalogMode": {
+              "description": "Analog (D/A) Output Mode",
+              "label": "Analog Mode"
+              },
+            "PwmMode": {
+              "description": "PWM Output Mode",
+              "label": "PWM Mode"
+            }
+          }
+        },
+        "PwmFrequency": {
+          "description": "PWM Frequency",
+          "label": "PWM Frequency",
+          "type": "number",
+          "unit": "Hz"
+        }
+      }
+    }
+  }
+}

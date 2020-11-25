@@ -1,0 +1,46 @@
+{
+  "info": {
+    "title": "OneFB Controller", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+  "sdfThing": {
+    "Controller": {
+      "description": "OneFB Modular Controller",
+      "label": "Modular Controller",
+      "sdfRequired": [
+        "#/sdfThing/Controller/sdfObject/ControllerInput",
+        "#/sdfThing/Controller/sdfObject/ControllerOutput",
+        "#/sdfThing/Controller/sdfObject/ControllerSetpoint",
+        "#/sdfThing/Controller/sdfObject/ControllerSettings"
+      ],
+      "sdfObject": {
+        "ControllerInput": {
+          "description": "Measurement Input for Controller",
+          "label": "Controller Input",
+          "sdfRef": "fb:#/sdfObject/ControllerInput"
+        },
+        "ControllerOutput": {
+          "description": "Controlled Variable Output for Controller",
+          "label": "Controller Output",
+          "sdfRef": "fb:#/sdfObject/ControllerOutput"
+        },
+        "ControllerSetpoint": {
+          "description": "Setpoint Input for Controller",
+          "label": "Controller Setpoint",
+          "sdfRef": "fb:#/sdfObject/ControllerSetpoint"
+        },
+        "ControllerSettings": {
+          "description": "Settings and Configuration for Controller",
+          "label": "Controller Settings",
+          "sdfRef": "fb:#/sdfObject/ControllerSettings"
+        }
+      }
+    }
+  }
+}

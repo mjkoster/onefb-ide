@@ -1,0 +1,49 @@
+{
+  "info": {
+    "title": "OneFB Controller Setpoint", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+  "sdfObject": {
+    "ControllerSetpoint": {
+      "description": "Setpoint for a controller",
+      "label": "Controller Setpoint",
+      "sdfProperty": {
+        "SetpointObjectLink": {
+          "description": "Reference to an object that is the source of remote setpoint data",
+          "label": "Setpoint Link",
+          "sdfRef": "fb:#/sdfData/ObjectLinkType"
+        },
+        "SetpointDataLink": {
+          "description": "Location to obtain remote setpoint data, from controller or subscriber",
+          "label": "Setpoint Data Link",
+          "sdfRef": "fb:#/sdfData/ObjectLinkType"
+        },
+        "CurrentValue" : {
+          "description": "Local copy of most recent setpoint data",
+          "label": "Current Setpoint Value",
+          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+        },
+        "SetpointMode": {
+          "description": "Remote/local setpoint mode setting",
+          "label": "Setpoint Mode",
+          "sdfChoice": {
+            "LocalMode": {
+              "description": "Local setpoint mode",
+              "label": "Local Mode"
+            },
+            "RemoteMode": {
+              "description": "Remote setpoint mode",
+              "label": "Remote Mode"
+            }
+          }
+        }
+      }
+    }
+  }
+}

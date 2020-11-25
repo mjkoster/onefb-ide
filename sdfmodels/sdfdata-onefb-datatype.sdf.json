@@ -1,0 +1,78 @@
+{
+  "info": {
+    "title": "OneFB Sensing function definitionsr", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+
+  "sdfData": {
+    "SensorMeasurementDataType": {
+      "description": "Sensor Measurement Data Type",
+      "label": "Sensor Measurement Data",
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1,
+      "multipleOf": "0.0001"
+    },
+    "ActuatorStateDataType": {
+      "description": "Actuator State Data Type",
+      "label": "Actuator State Data",
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1,
+      "multipleOf": "0.0001"
+    },
+    "ObjectLinkType": {
+      "description": "Type for pointing to an instance of an sdfObject",
+      "label": "Object Link Type",
+      "sdfChoice": {
+        "SdfLink": {
+          "sdfRef": "#/sdfData/SdfPointerType"
+        },
+        "UriLink": {
+          "type": "string",
+          "format": "uri"    
+        },
+        "Lwm2mObjectLink": {
+          "sdfRef": "#/sdfData/Lwm2mObjectLinkType"
+        }
+      }
+    },
+    "Lwm2mObjectLinkType": {
+      "description": "Type for pointing to an instance of a LWM2M Object",
+      "label": "LWM2M Object Link Type",
+      "type": "object",
+      "properties": {
+        "ObjectID": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 65535,
+          "multipleOf": 1
+        },
+        "InstanceID": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 65535,
+          "multipleOf": 1
+        }
+      }
+    },
+    "SdfPointerType": {
+      "description": "Type for pointing to an instance of an sdfObject using JSON Pointer",
+      "label": "SDF Pointer Type",
+      "type": "string",
+      "format": "json-pointer"
+    },
+    "TransitionTimeType": {
+      "description": "ISO 8601 duration format for transition time, see Appendix A of RFC 3339",
+      "label": "Transition Time Type",
+      "type": "String",
+      "format": "duration"
+    }
+  }
+}

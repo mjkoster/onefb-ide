@@ -1,0 +1,33 @@
+{
+  "info": {
+    "title": "Controller Input ", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+  "sdfObject": {
+    "ControllerInput": {
+      "description": "Shadow value of a sensor",
+      "label": "Controller Input",
+      "InputObjectLink": {
+        "description": "Reference to an object that is the source of input measurement data",
+        "label": "Input Link",
+        "sdfRef": "fb:#/sdfData/ObjectLinkType"
+      },
+      "InputDataLink": {
+        "description": "Location to obtain input measurement data, sensor or subscriber",
+        "label": "Input Data Link",
+        "sdfRef": "fb:#/sdfData/ObjectLinkType"
+      },
+      "CurrentValue": {
+        "description": "Local (mirrored) copy of <InputObjectLink>/sdfProperty/CurrentValue",
+        "label": "Current Input Value",
+        "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+      }
+    }
+  }
+}
