@@ -16,9 +16,31 @@
       "label": "Actuator",
       "sdfProperty": {
         "CurrentValue": {
-          "description": "The most recently updated state value",
-          "label": "Current State Value",
+          "description": "The most recently updated output state value",
+          "label": "Current Output Value",
           "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+        }
+      },
+      "sdfAction": {
+        "SetCurrentValue": {
+          "description": "Set the current output value of the actuator",
+          "label": "Set Current Value",
+          "InputData": {
+            "type": "object",
+            "required": [ "TargetValue" ],
+            "properties": {
+              "TargetValue": {
+                "description": "Target Output Value",
+                "label": "Target Output Value",
+                "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+              },
+              "TransitionTime": {
+                "description": "Move the actuator output smoothly from the current value to the target value",
+                "label": "Transition Time",
+                "sdfRef": "fb:#/sdfData/TransionTimeType"
+              }
+            }
+          }
         }
       }
     }
