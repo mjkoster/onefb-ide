@@ -12,20 +12,31 @@
 
   "sdfData": {
     "SensorMeasurementDataType": {
-      "description": "Sensor Measurement Data Type",
+      "description": "Sensor Measurement Data Type for unscaled or raw data",
       "label": "Sensor Measurement Data",
       "type": "number",
       "minimum": -1,
       "maximum": 1,
       "multipleOf": "0.0001"
     },
+    "ValueResolutionType": {
+      "description": "Decimal Resolution for values, multipleOf in even decimal fractions",
+      "label": "Value Resolution Type",
+      "type": "number",
+      "enum": [ 0.0001, 0.001, 0.01, 0.1, 1 ]
+    },
     "ActuatorStateDataType": {
-      "description": "Actuator State Data Type",
+      "description": "Actuator State Data Type for unscaled or raw data",
       "label": "Actuator State Data",
       "type": "number",
       "minimum": -1,
       "maximum": 1,
       "multipleOf": "0.0001"
+    },
+    "UnitType": {
+      "description": "Engineering Unit Type, use SenML Unit Formatted String as per RFC8428 and extensions",
+      "label": "Unit Type",
+      "type": "string"
     },
     "ObjectLinkType": {
       "description": "Type for pointing to an instance of an sdfObject",

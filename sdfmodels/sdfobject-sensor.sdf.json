@@ -14,11 +14,64 @@
     "Sensor": {
       "description": "Sensing function",
       "label": "Sensor",
+      "sdfRequired": [
+        "#/sdfObject/Sensor/sdfProperty/CurrentValue"
+      ],
       "sdfProperty": {
         "CurrentValue": {
-          "description": "The most recently measured value available",
+          "description": "The most recent raw measurement value available",
           "label": "Current Measured Value",
           "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+        },
+        "MinimumValue": {
+          "description": "The smallest meaningful raw measurement Value",
+          "label": "Minimum Value",
+          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+        },
+        "MaximumValue": {
+          "description": "The largest meaningful raw measurement Value",
+          "label": "Maximum Value",
+          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+        },
+        "ValueResolution": {
+          "description": "Decimal resolution of the raw measurement value",
+          "label": "Value Resolution",
+          "sdfRef": "fb:#/sdfData/ValueResolutionType"
+        },
+        "ScaledUnit": {
+          "description": "Engineering Unit for the scaled value",
+          "label": "Scaled Unit",
+          "sdfRef": "fb:#/sdfData/UnitType"
+        },
+        "ScaledMinimum": {
+          "description": "Minimum scaled measurable value in engineering units",
+          "label": "Minimum Scaled Value",
+          "type": "Number"
+        },
+        "ScaledMaximum": {
+          "description": "Maximum scaled measurable value in Eengineering units",
+          "label": "Maximum Scaled Value",
+          "type": "Number"
+        },
+        "ScaledValueResolution": {
+          "description": "The Decimal Resolution of the scaled value",
+          "label": "Scaled Value Resolution",
+          "type": "Number"
+        },
+        "CurrentScaledValue": {
+          "description": "The most recently measured value scaled to Engineering Units",
+          "label": "Current Scaled Value",
+          "type": "Number"
+        },
+        "CurrentScaledMinimum": {
+          "description": "The current minimum scaled value since reset",
+          "label": "Current Minimum Scaled Value",
+          "type": "Number"
+        },
+        "CurrentScaledMaximum": {
+          "description": "The current maximum scaled value since reset",
+          "label": "Current Miaximum Scaled Value",
+          "type": "Number"
         }
       }
     }
