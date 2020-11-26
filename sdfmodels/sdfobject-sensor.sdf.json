@@ -46,32 +46,47 @@
         "ScaledMinimum": {
           "description": "Minimum scaled measurable value in engineering units",
           "label": "Minimum Scaled Value",
-          "type": "Number"
+          "type": "number"
         },
         "ScaledMaximum": {
           "description": "Maximum scaled measurable value in Eengineering units",
           "label": "Maximum Scaled Value",
-          "type": "Number"
+          "type": "number"
         },
         "ScaledValueResolution": {
           "description": "The Decimal Resolution of the scaled value",
           "label": "Scaled Value Resolution",
-          "type": "Number"
+          "type": "number"
         },
         "CurrentScaledValue": {
           "description": "The most recently measured value scaled to Engineering Units",
           "label": "Current Scaled Value",
-          "type": "Number"
+          "type": "number"
         },
         "CurrentScaledMinimum": {
           "description": "The current minimum scaled value since reset",
           "label": "Current Minimum Scaled Value",
-          "type": "Number"
+          "type": "number"
         },
         "CurrentScaledMaximum": {
           "description": "The current maximum scaled value since reset",
           "label": "Current Miaximum Scaled Value",
-          "type": "Number"
+          "type": "number"
+        },
+        "SensorType": {
+          "description": "The type of sensor or process used",
+          "label": "Sensor Type",
+          "type": "string"
+        },
+        "ApplicationType": {
+          "description": "The application context of the sensor",
+          "label": "Application Type",
+          "type": "string"
+        },
+        "System Identifier": {
+          "description": "The system-unique identifier for this sensor",
+          "label": "System Identifier",
+          "type": "string"
         }
       }
     }
