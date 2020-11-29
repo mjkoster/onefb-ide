@@ -11,8 +11,8 @@
   "defaultNamespace": "fb", 
   "sdfThing": {
     "Controller": {
-      "description": "OneFB Modular Controller",
-      "label": "Modular Controller",
+      "description": "OneFB Feedback Controller",
+      "label": "Feedback Controller",
       "sdfRequired": [
         "#/sdfThing/Controller/sdfObject/ControllerInput",
         "#/sdfThing/Controller/sdfObject/ControllerOutput",
