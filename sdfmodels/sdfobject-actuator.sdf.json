@@ -87,9 +87,9 @@
         }
       },
       "sdfAction": {
-        "SetCurrentValue": {
-          "description": "Set the current output value of the actuator",
-          "label": "Set Current Value",
+        "MoveToValue": {
+          "description": "Move the actuator to a target value",
+          "label": "Move To Value",
           "InputData": {
             "type": "object",
             "required": [ "TargetValue" ],
@@ -102,7 +102,7 @@
               "TransitionTime": {
                 "description": "Move the actuator output smoothly from the current value to the target value",
                 "label": "Transition Time",
-                "sdfRef": "fb:#/sdfData/TransionTimeType"
+                "sdfRef": "fb:#/sdfData/TransitionTimeType"
               }
             }
           }

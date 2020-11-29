@@ -43,6 +43,26 @@
             }
           }
         }
+      },
+      "sdfAction": {
+        "MoveToSetpoint": {
+          "InputData": {
+            "type": "object",
+            "required": [ "TargetSetpoint" ],
+            "properties": {
+              "TargetSetpoint": {
+                "description": "Move to a target setpoint",
+                "label": "Target Setpoint",
+                "sdfRef": "fb:#/sdfData/ScalarDataType"
+              },
+              "TransitionTime": {
+                "description": "Move the actuator output smoothly from the current value to the target value",
+                "label": "Transition Time",
+                "sdfRef": "fb:#/sdfData/TransitionTimeType"
+              }
+            }
+          }
+        }
       }
     }
   }
