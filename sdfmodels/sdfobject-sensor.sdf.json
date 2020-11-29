@@ -88,6 +88,12 @@
           "label": "System Identifier",
           "type": "string"
         }
+      },
+      "sdfAction": {
+        "ResetMinMax": {
+          "description": "Reset the minumum and maximum sampled Values",
+          "label": "ResetMinMax"
+        }
       }
     }
   }
