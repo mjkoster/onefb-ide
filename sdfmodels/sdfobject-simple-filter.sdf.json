@@ -26,7 +26,7 @@
       "CurrentValue": {
         "description": "Filtered representation of <InputObjectLink>/sdfProperty/CurrentValue",
         "label": "Current Filter Output State Value",
-        "sdfRef": "fb:#/sdfData/FieldbusDataType"
+        "sdfRef": "fb:#/sdfProperty/CurrentValue"
       },
       "LogicBlock": {
         "description": "Logic specification for Filter",

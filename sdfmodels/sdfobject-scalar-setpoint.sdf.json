@@ -27,7 +27,7 @@
         "CurrentValue" : {
           "description": "Local copy of most recent setpoint data",
           "label": "Current Setpoint Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
         "SetpointMode": {
           "description": "Remote/local setpoint mode setting",

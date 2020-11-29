@@ -19,7 +19,7 @@
       ],
       "sdfProperty": {
         "CurrentValue": {
-          "description": "The most recent raw measurement value available",
+          "description": "The most recent sensed value available",
           "label": "Current Sensed Value",
           "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },

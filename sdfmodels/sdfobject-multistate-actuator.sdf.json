@@ -21,19 +21,19 @@
           "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
         "SensorType": {
-          "description": "The type of sensor or process used",
+          "description": "The type of actuator or process used",
           "label": "Sensor Type",
           "sdfRef": "fb:#/sdfProperty/SensorType"
         },
         "ApplicationType": {
-          "description": "The application context of the sensor",
+          "description": "The application context of the actuator",
           "label": "Application Type",
-          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
+          "sdfRef": "fb:#/sdfProperty/ApplicationType"
         },
-        "System Identifier": {
-          "description": "The system-unique identifier for this sensor",
+        "SystemIdentifier": {
+          "description": "The system-unique identifier for this actuator",
           "label": "System Identifier",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
         }
       },
       "sdfAction": {
@@ -47,7 +47,7 @@
               "TargetValue": {
                 "description": "Target Output Value",
                 "label": "Target Output Value",
-                "sdfRef": "fb:#/sdfData/ActuatorMultistateDataType"
+                "sdfRef": "fb:#/sdfData/MultistateDataType"
               }
             }
           }

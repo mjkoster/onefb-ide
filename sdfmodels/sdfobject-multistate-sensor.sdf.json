@@ -19,7 +19,7 @@
       ],
       "sdfProperty": {
         "CurrentValue": {
-          "description": "The most recent raw measurement value available",
+          "description": "The most recent sensed value available",
           "label": "Current Sensed Value",
           "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
@@ -31,12 +31,12 @@
         "ApplicationType": {
           "description": "The application context of the sensor",
           "label": "Application Type",
-          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
+          "sdfRef": "fb:#/sdfProperty/ApplicationType"
         },
         "System Identifier": {
           "description": "The system-unique identifier for this sensor",
           "label": "System Identifier",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
         }
       }
     }

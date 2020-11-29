@@ -26,7 +26,7 @@
       "CurrentValue": {
         "description": "Local (mirrored) copy of <InputObjectLink>/sdfProperty/CurrentValue",
         "label": "Current Multistate State Value",
-        "sdfRef": "fb:#/sdfData/MultistateDataType"
+        "sdfRef": "fb:#/sdfProperty/CurrentValue"
       }
     }
   }

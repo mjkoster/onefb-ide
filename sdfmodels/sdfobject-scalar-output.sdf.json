@@ -27,7 +27,7 @@
         "CurrentValue" : {
           "description": "Local copy of most recent control output for <OutputDataLink>/sdfProperty/CurrentState",
           "label": "Current Output Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/CurrentValue"
         }
       }
     }

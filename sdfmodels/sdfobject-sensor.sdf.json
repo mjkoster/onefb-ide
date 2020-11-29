@@ -19,17 +19,17 @@
       ],
       "sdfProperty": {
         "CurrentValue": {
-          "description": "The most recently updated output state value",
-          "label": "Current Output Value",
+          "description": "The most recently measured value",
+          "label": "Current Value",
           "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
         "MinimumValue": {
-          "description": "The smallest accepted Value",
+          "description": "The smallest measurable value",
           "label": "Minimum Value",
           "sdfRef": "fb:#/sdfProperty/MinimumValue"
         },
         "MaximumValue": {
-          "description": "The largest accepted Value",
+          "description": "The largest measurable Value",
           "label": "Maximum Value",
           "sdfRef": "fb:#/sdfProperty/MaximumValue"
         },
@@ -44,12 +44,12 @@
           "sdfRef": "fb:#/sdfProperty/ScaledUnit"
         },
         "ScaledMinimum": {
-          "description": "Minimum scaled value in engineering units",
+          "description": "Smallest measurable value in engineering units",
           "label": "Minimum Scaled Value",
           "sdfRef": "fb:#/sdfProperty/ScaledMinimum"
         },
         "ScaledMaximum": {
-          "description": "Maximum scaled value in Engineering units",
+          "description": "Largest measurable value in Engineering units",
           "label": "Maximum Scaled Value",
           "sdfRef": "fb:#/sdfProperty/ScaledMaximum"
         },
@@ -59,22 +59,22 @@
           "sdfRef": "fb:#/sdfProperty/ScaledValueResolution"
         },
         "CurrentScaledValue": {
-          "description": "The most recently accepted value scaled to Engineering Units",
+          "description": "The most recently measured value scaled to Engineering Units",
           "label": "Current Scaled Value",
           "sdfRef": "fb:#/sdfProperty/CurrentScaledValue"
         },
         "CurrentScaledMinimum": {
-          "description": "The current minimum scaled value since reset",
+          "description": "The smallest measured value sinse the last reset",
           "label": "Current Minimum Scaled Value",
           "sdfRef": "fb:#/sdfProperty/CurrentScaledMinimum"
         },
         "CurrentScaledMaximum": {
-          "description": "The current maximum scaled value since reset",
-          "label": "Current Miaximum Scaled Value",
+          "description": "The greatest measured value sinse the last reset",
+          "label": "Current Maximum Scaled Value",
           "sdfRef": "fb:#/sdfProperty/CurrentScaledMaximum"
         },
         "SensorType": {
-          "description": "The type of actuator or process used, for display purposes",
+          "description": "The type of sensor or process used, for display purposes",
           "label": "Sensor Type",
           "sdfRef": "fb:#/sdfProperty/SensorType"
         },
