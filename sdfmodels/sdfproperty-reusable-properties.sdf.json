@@ -14,7 +14,7 @@
     "CurrentValue": {
       "description": "The most recent raw measurement value available",
       "label": "Current Measured Value",
-      "sdfRef": "fb:#/sdfData/ScalarDataType"
+      "sdfRef": "fb:#/sdfData/FieldbusDataType"
     },
     "MinimumValue": {
       "description": "The smallest meaningful raw measurement Value",

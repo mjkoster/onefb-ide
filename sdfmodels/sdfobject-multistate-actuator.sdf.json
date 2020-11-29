@@ -18,7 +18,22 @@
         "CurrentValue": {
           "description": "The most recently updated output state value",
           "label": "Current Output Value",
-          "sdfRef": "fb:#/sdfData/ActuatorMultistateDataType"
+          "sdfRef": "fb:#/sdfProperty/CurrentValue"
+        },
+        "SensorType": {
+          "description": "The type of sensor or process used",
+          "label": "Sensor Type",
+          "sdfRef": "fb:#/sdfProperty/SensorType"
+        },
+        "ApplicationType": {
+          "description": "The application context of the sensor",
+          "label": "Application Type",
+          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
+        },
+        "System Identifier": {
+          "description": "The system-unique identifier for this sensor",
+          "label": "System Identifier",
+          "type": "string"
         }
       },
       "sdfAction": {

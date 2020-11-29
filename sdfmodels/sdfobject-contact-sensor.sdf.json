@@ -21,22 +21,17 @@
         "CurrentValue": {
           "description": "The most recent raw measurement value available",
           "label": "Current Sensed Value",
-          "sdfRef": "fb:#/sdfData/ContactDataType"
-        },
-        "SensorType": {
-          "description": "The type of sensor or process used",
-          "label": "Sensor Type",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
         "ApplicationType": {
           "description": "The application context of the sensor",
           "label": "Application Type",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/ApplicationType"
         },
         "System Identifier": {
           "description": "The system-unique identifier for this sensor",
           "label": "System Identifier",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
         }
       }
     }
