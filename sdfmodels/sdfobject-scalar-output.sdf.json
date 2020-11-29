@@ -1,6 +1,6 @@
 {
   "info": {
-    "title": "SDF model for OneFB definitionsr", 
+    "title": "Scalar Output", 
     "version": "2020-11-23", 
     "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
     "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
@@ -10,9 +10,9 @@
   }, 
   "defaultNamespace": "fb", 
   "sdfObject": {
-    "ControllerOutput": {
-      "description": "Current Controller Output value",
-      "label": "Controller Output",
+    "ScalarOutput": {
+      "description": "Scalar Output Module",
+      "label": "Scalar Output",
       "sdfProperty": {
         "OutputObjectLink": {
           "description": "Reference to a control point to actuate",
@@ -27,7 +27,7 @@
         "CurrentValue" : {
           "description": "Local copy of most recent control output for <OutputDataLink>/sdfProperty/CurrentState",
           "label": "Current Output Value",
-          "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         }
       }
     }

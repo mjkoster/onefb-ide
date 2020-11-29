@@ -23,17 +23,17 @@
         "ControllerInput": {
           "description": "Measurement Input for Controller",
           "label": "Controller Input",
-          "sdfRef": "fb:#/sdfObject/ControllerInput"
+          "sdfRef": "fb:#/sdfObject/ScalarInput"
         },
         "ControllerOutput": {
           "description": "Controlled Variable Output for Controller",
           "label": "Controller Output",
-          "sdfRef": "fb:#/sdfObject/ControllerOutput"
+          "sdfRef": "fb:#/sdfObject/ScalarOutput"
         },
         "ControllerSetpoint": {
           "description": "Setpoint Input for Controller",
           "label": "Controller Setpoint",
-          "sdfRef": "fb:#/sdfObject/ControllerSetpoint"
+          "sdfRef": "fb:#/sdfObject/ScalarSetpoint"
         },
         "ControllerSettings": {
           "description": "Settings and Configuration for Controller",

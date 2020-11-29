@@ -1,6 +1,6 @@
 {
   "info": {
-    "title": "Controller Input ", 
+    "title": "Scalar Input ", 
     "version": "2020-11-23", 
     "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
     "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
@@ -10,23 +10,23 @@
   }, 
   "defaultNamespace": "fb", 
   "sdfObject": {
-    "ControllerInput": {
-      "description": "Shadow value of a sensor",
-      "label": "Controller Input",
+    "ScalarInput": {
+      "description": "Scalar Input Module",
+      "label": "Current Scalar Input Value",
       "InputObjectLink": {
-        "description": "Reference to an object that is the source of input measurement data",
+        "description": "Reference to an object that describes the source of data",
         "label": "Input Link",
         "sdfRef": "fb:#/sdfData/ObjectLinkType"
       },
       "InputDataLink": {
-        "description": "Location to obtain input measurement data, sensor or subscriber",
+        "description": "Location to obtain input data",
         "label": "Input Data Link",
         "sdfRef": "fb:#/sdfData/ObjectLinkType"
       },
       "CurrentValue": {
         "description": "Local (mirrored) copy of <InputObjectLink>/sdfProperty/CurrentValue",
         "label": "Current Input Value",
-        "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+        "sdfRef": "fb:#/sdfData/ScalarDataType"
       }
     }
   }

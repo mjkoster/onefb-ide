@@ -18,17 +18,17 @@
         "CurrentValue": {
           "description": "The most recently updated output state value",
           "label": "Current Output Value",
-          "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "MinimumValue": {
           "description": "The smallest accepted Value",
           "label": "Minimum Value",
-          "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "MaximumValue": {
           "description": "The largest accepted Value",
           "label": "Maximum Value",
-          "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "ValueResolution": {
           "description": "Decimal resolution constraint for accepted Value",
@@ -107,7 +107,7 @@
               "TargetValue": {
                 "description": "Target Output Value",
                 "label": "Target Output Value",
-                "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+                "sdfRef": "fb:#/sdfData/ScalarDataType"
               },
               "TransitionTime": {
                 "description": "Move the actuator output smoothly from the current value to the target value",

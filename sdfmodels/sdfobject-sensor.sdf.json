@@ -21,17 +21,17 @@
         "CurrentValue": {
           "description": "The most recent raw measurement value available",
           "label": "Current Measured Value",
-          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "MinimumValue": {
           "description": "The smallest meaningful raw measurement Value",
           "label": "Minimum Value",
-          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "MaximumValue": {
           "description": "The largest meaningful raw measurement Value",
           "label": "Maximum Value",
-          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "ValueResolution": {
           "description": "Decimal resolution of the raw measurement value",
@@ -49,7 +49,7 @@
           "type": "number"
         },
         "ScaledMaximum": {
-          "description": "Maximum scaled measurable value in Eengineering units",
+          "description": "Maximum scaled measurable value in engineering units",
           "label": "Maximum Scaled Value",
           "type": "number"
         },
@@ -59,7 +59,7 @@
           "type": "number"
         },
         "CurrentScaledValue": {
-          "description": "The most recently measured value scaled to Engineering Units",
+          "description": "The most recently measured value scaled to engineering units",
           "label": "Current Scaled Value",
           "type": "number"
         },
@@ -70,7 +70,7 @@
         },
         "CurrentScaledMaximum": {
           "description": "The current maximum scaled value since reset",
-          "label": "Current Miaximum Scaled Value",
+          "label": "Current Maximum Scaled Value",
           "type": "number"
         },
         "SensorType": {

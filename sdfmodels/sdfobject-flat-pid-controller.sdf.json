@@ -28,7 +28,7 @@
         "CurrentInputValue" : {
           "description": "Local (mirrored) copy of <InputObjectLink>/sdfProperty/CurrentValue",
           "label": "Current Input Value",
-          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "OutputObjectLink": {
           "description": "Reference to a control point to actuate",
@@ -43,7 +43,7 @@
         "CurrentOutputValue" : {
           "description": "Local copy of most recent control output for <OutputDataLink>/sdfProperty/CurrentState",
           "label": "Current Output Value",
-          "sdfRef": "fb:#/sdfData/ActuatorStateDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "SetpointObjectLink": {
           "description": "Reference to an object that is the source of remote setpoint data",
@@ -58,7 +58,7 @@
         "CurrentSetpointValue" : {
           "description": "Local copy of most recent setpoint data",
           "label": "Current Setpoint Value",
-          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "SetpointMode": {
           "description": "Remote/local setpoint mode setting",

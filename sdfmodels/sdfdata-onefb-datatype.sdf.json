@@ -11,9 +11,9 @@
   "defaultNamespace": "fb", 
 
   "sdfData": {
-    "SensorMeasurementDataType": {
-      "description": "Sensor Measurement Data Type for unscaled or raw data",
-      "label": "Sensor Measurement Data",
+    "ScalarDataType": {
+      "description": "Data Type for unscaled or raw scalar data",
+      "label": "Scalar Data",
       "type": "number",
       "minimum": -1,
       "maximum": 1,
@@ -43,14 +43,6 @@
       "description": "Contact Data Type",
       "label": "Coil Data",
       "type": "boolean"
-    },
-    "ActuatorStateDataType": {
-      "description": "Actuator State Data Type for unscaled or raw data",
-      "label": "Actuator State Data",
-      "type": "number",
-      "minimum": -1,
-      "maximum": 1,
-      "multipleOf": "0.0001"
     },
     "ActuatorMultistateDataType": {
       "description": "Actuator State Data Type for Multistate data",

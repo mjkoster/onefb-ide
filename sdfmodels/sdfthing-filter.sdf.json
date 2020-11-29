@@ -10,20 +10,20 @@
   }, 
   "defaultNamespace": "fb", 
   "sdfThing": {
-    "Controller": {
+    "Filter": {
       "description": "Apply a Filter to a Data Sequence",
       "label": "Filter",
       "sdfRequired": [
         { 
           "sdfChoice": {
-            "FilterInput": "#/sdfThing/Controller/sdfObject/FilterInput",
+            "FilterInput": "#/sdfThing/Controller/sdfObject/ScalarInput",
             "ContactInput": "#/sdfThing/Controller/sdfObject/ContactInput",
             "MultistateInput": "#/sdfThing/Controller/sdfObject/MultistateInput"
           }
         },
         { 
           "sdfChoice": {
-            "FilterOutput": "#/sdfThing/Controller/sdfObject/FilterOutput",
+            "FilterOutput": "#/sdfThing/Controller/sdfObject/ScalarOutput",
             "CoilOutput": "#/sdfThing/Controller/sdfObject/CoilOutput",
             "MultistateOutput": "#/sdfThing/Controller/sdfObject/MultistateOutput"
           }
@@ -32,10 +32,10 @@
         "#/sdfThing/Controller/sdfObject/FilterSettings"
       ],
       "sdfObject": {
-        "FilterInput": {
+        "ScalarInput": {
           "description": "Input Data for Filter",
           "label": "Filter Input",
-          "sdfRef": "fb:#/sdfObject/FilterInput"
+          "sdfRef": "fb:#/sdfObject/ScalarInput"
         },
         "ContactInput": {
           "description": "Contact Input for Logic Controller",
@@ -47,10 +47,10 @@
           "label": "Multistate Input",
           "sdfRef": "fb:#/sdfObject/MultistateInput"
         },
-        "FilterOutput": {
+        "ScalarOutput": {
           "description": "Output Data from Filter",
           "label": "Filter Output",
-          "sdfRef": "fb:#/sdfObject/FilterOutput"
+          "sdfRef": "fb:#/sdfObject/ScalarOutput"
         },        
         "CoilOutput": {
           "description": "Coil Output for Logic Controller",

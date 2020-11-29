@@ -1,6 +1,6 @@
 {
   "info": {
-    "title": "OneFB Controller Setpoint", 
+    "title": "Scalar Setpoint", 
     "version": "2020-11-23", 
     "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
     "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
@@ -10,9 +10,9 @@
   }, 
   "defaultNamespace": "fb", 
   "sdfObject": {
-    "ControllerSetpoint": {
-      "description": "Setpoint for a controller",
-      "label": "Controller Setpoint",
+    "ScalarSetpoint": {
+      "description": "Setpoint Module for a scalar controller",
+      "label": "Scalar Setpoint",
       "sdfProperty": {
         "SetpointObjectLink": {
           "description": "Reference to an object that is the source of remote setpoint data",
@@ -27,7 +27,7 @@
         "CurrentValue" : {
           "description": "Local copy of most recent setpoint data",
           "label": "Current Setpoint Value",
-          "sdfRef": "fb:#/sdfData/SensorMeasurementDataType"
+          "sdfRef": "fb:#/sdfData/ScalarDataType"
         },
         "SetpointMode": {
           "description": "Remote/local setpoint mode setting",
