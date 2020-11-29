@@ -16,6 +16,26 @@
       "label": "Current Measured Value",
       "sdfRef": "fb:#/sdfData/FieldbusDataType"
     },
+    "CurrentScalarValue": {
+      "description": "The most recent raw measurement value available",
+      "label": "Current Measured Value",
+      "sdfRef": "fb:#/sdfData/ScalarDataType"
+    },
+    "CurrentMultistateValue": {
+      "description": "The most recent raw measurement value available",
+      "label": "Current Measured Value",
+      "sdfRef": "fb:#/sdfData/MultistateDataType"
+    },
+    "CurrentContactValue": {
+      "description": "The most recent raw measurement value available",
+      "label": "Current Measured Value",
+      "sdfRef": "fb:#/sdfData/ContactDataType"
+    },
+    "CurrentCoilValue": {
+      "description": "The most recent raw measurement value available",
+      "label": "Current Measured Value",
+      "sdfRef": "fb:#/sdfData/CoilDataType"
+    },
     "MinimumValue": {
       "description": "The smallest meaningful raw measurement Value",
       "label": "Minimum Value",
