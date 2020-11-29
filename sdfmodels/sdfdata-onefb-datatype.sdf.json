@@ -19,6 +19,36 @@
       "maximum": 1,
       "multipleOf": "0.0001"
     },
+    "MultistateDataType": {
+      "description": "Multistate Data Type defined using sdfChoice",
+      "label": "Multistate Data"
+    },
+    "ContactDataType": {
+      "description": "Contact Data Type, True = Closed, False = Open",
+      "label": "Contact Data",
+      "type": "boolean"
+    },
+    "CoilDataType": {
+      "description": "Coil Data Type, True = energized",
+      "label": "Coil Data",
+      "type": "boolean"
+    },
+    "FieldbusDtaType": {
+      "sdfChoce": {
+        "ScalarDataType": {
+          "sdfRef": "#/sdfData/ScalarDataType"
+        },
+        "MultistateDataType": {
+          "sdfRef": "#/sdfData/MultistateDataType"
+        },
+        "ContactDataType": {
+          "sdfRef": "#/sdfData/ContactDataType"
+        },
+        "CoilDataType": {
+          "sdfRef": "#/sdfData/CoilDataType"
+        }
+      }
+    },
     "ValueResolutionType": {
       "description": "Decimal Resolution for values, multipleOf in even decimal fractions",
       "label": "Value Resolution Type",
@@ -29,24 +59,6 @@
         "10e-1": { "const": 0.1 }, 
         "10e0": { "const": 1 }
       } 
-    },
-    "MultistateDataType": {
-      "description": "Multistate Data Type defined using sdfChoice",
-      "label": "Multistate Data"
-    },
-    "ContactDataType": {
-      "description": "Contact Data Type",
-      "label": "Contact Data",
-      "type": "boolean"
-    },
-    "CoilDataType": {
-      "description": "Contact Data Type",
-      "label": "Coil Data",
-      "type": "boolean"
-    },
-    "ActuatorMultistateDataType": {
-      "description": "Actuator State Data Type for Multistate data",
-      "label": "Actuator Multistate Data"
     },
     "UnitType": {
       "description": "Engineering Unit Type, use SenML Unit Formatted String as per RFC8428 and extensions",
