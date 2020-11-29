@@ -18,82 +18,82 @@
         "CurrentValue": {
           "description": "The most recently updated output state value",
           "label": "Current Output Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
         "MinimumValue": {
           "description": "The smallest accepted Value",
           "label": "Minimum Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/MinimumValue"
         },
         "MaximumValue": {
           "description": "The largest accepted Value",
           "label": "Maximum Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/MaximumValue"
         },
         "ValueResolution": {
           "description": "Decimal resolution constraint for accepted Value",
           "label": "Value Resolution",
-          "sdfRef": "fb:#/sdfData/ValueResolutionType"
+          "sdfRef": "fb:#/sdfProperty/ValueResolution"
         },
         "ScaledUnit": {
           "description": "Engineering Unit for the scaled value",
           "label": "Scaled Unit",
-          "sdfRef": "fb:#/sdfData/UnitType"
+          "sdfRef": "fb:#/sdfProperty/ScaledUnit"
         },
         "ScaledMinimum": {
           "description": "Minimum scaled value in engineering units",
           "label": "Minimum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/ScaledMinimum"
         },
         "ScaledMaximum": {
           "description": "Maximum scaled value in Engineering units",
           "label": "Maximum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/ScaledMaximum"
         },
         "ScaledValueResolution": {
           "description": "The Decimal Resolution of the scaled value",
           "label": "Scaled Value Resolution",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/ScaledValueResolution"
         },
         "CurrentScaledValue": {
           "description": "The most recently accepted value scaled to Engineering Units",
           "label": "Current Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/CurrentScaledValue"
         },
         "CurrentScaledMinimum": {
           "description": "The current minimum scaled value since reset",
           "label": "Current Minimum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/CurrentScaledMinimum"
         },
         "CurrentScaledMaximum": {
           "description": "The current maximum scaled value since reset",
           "label": "Current Miaximum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/CurrentScaledMaximum"
         },
         "ActuatorType": {
           "description": "The type of actuator or process used, for display purposes",
           "label": "Sensor Type",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/ActuatorType"
         },
         "ApplicationType": {
           "description": "The application context of the sensor, for display purposes",
           "label": "Application Type",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/ApplicationType"
         },
-        "System Identifier": {
+        "SystemIdentifier": {
           "description": "The system-unique identifier for this sensor e.g. P&ID Tag",
           "label": "System Identifier",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
         },
         "OutputMode": {
           "description": "The mode of the output, analog or PWM",
           "label": "Output Mode",
-          "sdfRef": "#/sdfObject/pwmActuator/sdfData/OutputModeData"
+          "sdfRef": "fb:#/sdfProperty/OutputMode"
         },
         "PwmFrequency": {
           "description": "PWM Frequency",
           "label": "PWM Frequency",
-          "sdfRef": "#/sdfObject/pwmActuator/sdfData/PwmFrequency"
+          "sdfRef": "fb:#/sdfProperty/PwmFrequency"
         }
       },
       "sdfAction": {
@@ -124,7 +124,7 @@
             "type": "object",
             "properties": {
               "OutputMode": {
-                "sdfRef": "#/sdfObject/pwmActuator/sdfData/OutputModeData"
+                "sdfRef": "fb:#/sdfData/OutputModeData"
               }
             }
           }
@@ -138,7 +138,7 @@
               "TargetPwmFrequency": {
                 "description": "Target PWM Frequency",
                 "label": "Target PWM Frequency",
-                "sdfRef": "#/sdfObject/pwmActuator/sdfData/PwmFrequency"
+                "sdfRef": "fb:#/sdfData/PwmFrequency"
               }
             }
           }
@@ -146,28 +146,6 @@
         "ResetMinMax": {
           "description": "Reset the minumum and maximum actuator Values",
           "label": "ResetMinMax"
-        }
-      },
-      "sdfData": {
-        "OutputModeData": {
-          "description": "The mode of the output",
-          "label": "Output Mode",
-          "sdfChoice": {
-            "AnalogMode": {
-              "description": "Analog (D/A) Output Mode",
-              "label": "Analog Mode"
-              },
-            "PwmMode": {
-              "description": "PWM Output Mode",
-              "label": "PWM Mode"
-            }
-          }
-        },
-        "PwmFrequency": {
-          "description": "PWM Frequency",
-          "label": "PWM Frequency",
-          "type": "number",
-          "unit": "Hz"
         }
       }
     }

@@ -19,76 +19,75 @@
       ],
       "sdfProperty": {
         "CurrentValue": {
-          "description": "The most recent raw measurement value available",
-          "label": "Current Measured Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "description": "The most recently updated output state value",
+          "label": "Current Output Value",
+          "sdfRef": "fb:#/sdfProperty/CurrentValue"
         },
         "MinimumValue": {
-          "description": "The smallest meaningful raw measurement Value",
+          "description": "The smallest accepted Value",
           "label": "Minimum Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/MinimumValue"
         },
         "MaximumValue": {
-          "description": "The largest meaningful raw measurement Value",
+          "description": "The largest accepted Value",
           "label": "Maximum Value",
-          "sdfRef": "fb:#/sdfData/ScalarDataType"
+          "sdfRef": "fb:#/sdfProperty/MaximumValue"
         },
         "ValueResolution": {
-          "description": "Decimal resolution of the raw measurement value",
+          "description": "Decimal resolution constraint for accepted Value",
           "label": "Value Resolution",
-          "sdfRef": "fb:#/sdfData/ValueResolutionType"
+          "sdfRef": "fb:#/sdfProperty/ValueResolution"
         },
         "ScaledUnit": {
           "description": "Engineering Unit for the scaled value",
           "label": "Scaled Unit",
-          "sdfRef": "fb:#/sdfData/UnitType"
+          "sdfRef": "fb:#/sdfProperty/ScaledUnit"
         },
         "ScaledMinimum": {
-          "description": "Minimum scaled measurable value in engineering units",
+          "description": "Minimum scaled value in engineering units",
           "label": "Minimum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/ScaledMinimum"
         },
         "ScaledMaximum": {
-          "description": "Maximum scaled measurable value in engineering units",
+          "description": "Maximum scaled value in Engineering units",
           "label": "Maximum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/ScaledMaximum"
         },
         "ScaledValueResolution": {
           "description": "The Decimal Resolution of the scaled value",
           "label": "Scaled Value Resolution",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/ScaledValueResolution"
         },
         "CurrentScaledValue": {
-          "description": "The most recently measured value scaled to engineering units",
+          "description": "The most recently accepted value scaled to Engineering Units",
           "label": "Current Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/CurrentScaledValue"
         },
         "CurrentScaledMinimum": {
           "description": "The current minimum scaled value since reset",
           "label": "Current Minimum Scaled Value",
-          "type": "number"
+          "sdfRef": "fb:#/sdfProperty/CurrentScaledMinimum"
         },
         "CurrentScaledMaximum": {
           "description": "The current maximum scaled value since reset",
-          "label": "Current Maximum Scaled Value",
-          "type": "number"
+          "label": "Current Miaximum Scaled Value",
+          "sdfRef": "fb:#/sdfProperty/CurrentScaledMaximum"
         },
         "SensorType": {
-          "description": "The type of sensor or process used",
+          "description": "The type of actuator or process used, for display purposes",
           "label": "Sensor Type",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/SensorType"
         },
         "ApplicationType": {
-          "description": "The application context of the sensor",
+          "description": "The application context of the sensor, for display purposes",
           "label": "Application Type",
-          "type": "string"
+          "sdfRef": "fb:#/sdfProperty/ApplicationType"
         },
-        "System Identifier": {
-          "description": "The system-unique identifier for this sensor",
+        "SystemIdentifier": {
+          "description": "The system-unique identifier for this sensor e.g. P&ID Tag",
           "label": "System Identifier",
-          "type": "string"
-        }
-      },
+          "sdfRef": "fb:#/sdfProperty/SystemIdentifier"
+        }      },
       "sdfAction": {
         "ResetMinMax": {
           "description": "Reset the minumum and maximum sampled Values",
