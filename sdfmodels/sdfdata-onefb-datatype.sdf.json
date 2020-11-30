@@ -65,25 +65,43 @@
       "label": "Unit Type",
       "type": "string"
     },
-    "ObjectLinkType": {
-      "description": "Type for pointing to an instance of an sdfObject",
-      "label": "Object Link Type",
-      "sdfChoice": {
-        "SdfLink": {
-          "sdfRef": "#/sdfData/SdfPointerType"
+    "TypedLink": {
+      "description": "Typed link for use with CoRAL, RDF, or weblinks",
+      "label": "Typed Link",
+      "type": "object",
+      "Properties": {
+        "TargetPointer": { 
+          "sdfRef": "#/sdfData/ObjectPointerType" 
         },
-        "UriLink": {
-          "type": "string",
-          "format": "uri"    
+        "TargetAttributes": {
+          "type": "array",
+          "items": "#/sdfData/TargetAttributeType"
         },
-        "Lwm2mObjectLink": {
-          "sdfRef": "#/sdfData/Lwm2mObjectLinkType"
+        "RelationType": {
+          "type": "array",
+          "items": "#/sdfData/RelationType"
         }
       }
     },
-    "Lwm2mObjectLinkType": {
+    "ObjectPointerType": {
+      "description": "Type for pointing to an instance of an sdfObject",
+      "label": "Object Pointer Type",
+      "sdfChoice": {
+        "JsonPointer": {
+          "sdfRef": "#/sdfData/JsonPointerType"
+        },
+        "UriPointer": {
+          "type": "string",
+          "format": "uri"    
+        },
+        "Lwm2mObjectPointer": {
+          "sdfRef": "#/sdfData/Lwm2mObjectPointerType"
+        }
+      }
+    },
+    "Lwm2mObjectPointerType": {
       "description": "Type for pointing to an instance of a LWM2M Object",
-      "label": "LWM2M Object Link Type",
+      "label": "LWM2M Object Pointer (objlink) Type",
       "type": "object",
       "properties": {
         "ObjectID": {
@@ -100,13 +118,23 @@
         }
       }
     },
-    "SdfPointerType": {
+   "JsonPointerType": {
       "description": "Type for pointing to an instance of an sdfObject using JSON Pointer",
-      "label": "SDF Pointer Type",
+      "label": "JSON Pointer Type",
       "type": "string",
       "format": "json-pointer"
     },
-    "TransitionTimeType": {
+    "TargetAttributeType": {
+      "description": "Target Attribute for use with Typed links",
+      "label": "Target Attribute Type",
+      "type": "String"
+    },
+    "LinkRelationType": {
+      "description": "Link Relation Type for RDF, etc.",
+      "label": "Link Relation Type",
+      "type": "String"
+    },
+     "TransitionTimeType": {
       "description": "ISO 8601 duration format for transition time, see Appendix A of RFC 3339",
       "label": "Transition Time Type",
       "type": "String",

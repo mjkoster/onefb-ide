@@ -17,12 +17,12 @@
         "SetpointObjectLink": {
           "description": "Reference to an object that is the source of remote setpoint data",
           "label": "Setpoint Link",
-          "sdfRef": "fb:#/sdfData/ObjectLinkType"
+          "sdfRef": "fb:#/sdfData/ObjectPointerType"
         },
         "SetpointDataLink": {
           "description": "Location to obtain remote setpoint data, from controller or subscriber",
           "label": "Setpoint Data Link",
-          "sdfRef": "fb:#/sdfData/ObjectLinkType"
+          "sdfRef": "fb:#/sdfData/ObjectPointerType"
         },
         "CurrentValue" : {
           "description": "Local copy of most recent setpoint data",

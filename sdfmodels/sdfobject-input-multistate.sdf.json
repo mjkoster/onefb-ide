@@ -16,12 +16,12 @@
       "InputObjectLink": {
         "description": "Reference to an object that is the source of multistate data",
         "label": "Input Link",
-        "sdfRef": "fb:#/sdfData/ObjectLinkType"
+        "sdfRef": "fb:#/sdfData/ObjectPointerType"
       },
       "InputDataLink": {
         "description": "Location to obtain Multistate data, sensor or subscriber",
         "label": "Input Data Link",
-        "sdfRef": "fb:#/sdfData/ObjectLinkType"
+        "sdfRef": "fb:#/sdfData/ObjectPointerType"
       },
       "CurrentValue": {
         "description": "Local (mirrored) copy of <InputObjectLink>/sdfProperty/CurrentValue",

@@ -17,7 +17,7 @@
         "SourceObjectLink": {
           "description": "Link to the object that supplies data to be published",
           "label": "Source Object Link",
-          "sdfRef": "fb:#/sdfData/ObjectLinkType"
+          "sdfRef": "fb:#/sdfData/ObjectPointerType"
         },
         "SourceObjectProperty": {
           "description": "Pointer to an sdfProperty or sdfEvent to publish, relative to the Source Object",
@@ -35,7 +35,7 @@
         "PublishServer": {
           "description": "Object link pointing to the server instance for Publication",
           "label": "Publish Server",
-          "sdfRef": "fb:#/sdfData/ObjectLinkType"
+          "sdfRef": "fb:#/sdfData/ObjectPointerType"
         }
       }
     }

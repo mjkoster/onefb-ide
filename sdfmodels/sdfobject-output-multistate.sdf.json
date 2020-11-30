@@ -16,12 +16,12 @@
       "OutputObjectLink": {
         "description": "Reference to a multistate control point to actuate",
         "label": "Output Link",
-        "sdfRef": "fb:#/sdfData/ObjectLinkType"
+        "sdfRef": "fb:#/sdfData/ObjectPointerType"
       },
       "OutputDataLink": {
         "description": "Location to update multistate control data, actuator or publisher",
         "label": "Output Data Link",
-        "sdfRef": "fb:#/sdfData/ObjectLinkType"
+        "sdfRef": "fb:#/sdfData/ObjectPointerType"
       },
       "CurrentValue": {
         "description": "Local (mirrored) copy of <InputObjectLink>/sdfProperty/CurrentValue",
