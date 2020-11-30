@@ -273,21 +273,21 @@
           "sdfChoice": {
             "ReadCoilStatusRequest": {
               "description": "Function Code 01 - readCoilStatus",
-              "type": "array",
-              "items": [
-                {
+              "type": "object",
+              "properties": {
+                "StartingAddress": {
                   "description": "Starting Address",
                   "type": "number",
                   "minimum": 0,
                   "maximum": 65535
                 },
-                {
+                "NumberOfPoints": {
                   "description": "Number of points",
                   "type": "number",
                   "minimum": 0,
                   "maximum": 65535
                 }
-              ]
+              }
             },
             "UnknownRequestType": {
               "description": "validate as an opaque payload",
@@ -301,20 +301,20 @@
           "sdfChoice": {
             "ReadCoilStatusResponse": {
               "description": "Function Code 01 - readCoilStatus",
-              "type": "array",
-              "items": [
-                {
+              "type": "object",
+              "properties": {
+                "ByteCount": {
                   "description": "Byte Count",
                   "type": "number",
                   "minimum": 0,
                   "maximum": 255
                 },
-                {
+                "CoilData": {
                   "description": "Coil Data",
                   "type": "string",
                   "subType": "byteString"
                 }
-              ]
+              }
             },
             "UnknownRequestType": {
               "description": "validate as an opaque payload",
