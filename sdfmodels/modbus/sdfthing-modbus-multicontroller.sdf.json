@@ -14,7 +14,7 @@
       "sdfObject": {
         "ThingInformation": {
           "sdfProperty": {
-            "VendorName": { "const": "ADAM" },
+            "VendorName": { "const": "Advantech" },
             "ModelName": { "const": "ADAM-4022T" },
             "ProductDescription": { "const": "Dual Loop PID Controller" }
           }
@@ -27,15 +27,20 @@
               "sdfRef": "#/sdfObject/ControllerInput",
               "sdfMapping": {
                 "#/sdfThing/DualLoopController/sdfThing/LoopController0/sdfObject/AnalogInput0/sdfProperty/CurrentValue": {
-                  "ModbusAddress": 0
+                  "ModbusAddress": { "const": 0 }
+                }
+              },
+              "sdfMerge": {
+                "0/sdfProperty/CurrentValue": {
+                  "ModbusAddress": { "const": 0 }
                 }
               }
             },
             "AnalogInput1": {
-              "sdfRef": "#/sdfObject/ControllerInput",
+              "sdfRefWithMerge": "#/sdfObject/ControllerInput",
               "sdfProperty": {
                 "CurrentValue": {
-                  "ModbusAddress": 1
+                  "ModbusAddress": { "const": 1 }
                 }
               }
             },
@@ -43,10 +48,10 @@
               "sdfRef": "#/sdfObject/ControllerOutput"
             },
             "ControllerSetpoint": {
-              "sdfRef": "#/sdfObject/ControllerSetpoint",
+              "sdfRefWithMergePatch": "#/sdfObject/ControllerSetpoint",
               "sdfProperty": {
                 "CurrentValue": {
-                  "ModbusAddress": 1020
+                  "fb:#/sdfQuality/ModbusAddress": { "const": 1020 }
                 }
               }
             },
