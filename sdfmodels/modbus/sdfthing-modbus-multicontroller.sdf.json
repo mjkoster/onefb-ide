@@ -22,102 +22,35 @@
       },
       "sdfThing": {
         "LoopController0": {
-          "sdfObject": {
-            "AnalogInput0": {
-              "sdfRef": "#/sdfObject/ControllerInput",
-              "sdfMapping": {
-                "#/sdfThing/DualLoopController/sdfThing/LoopController0/sdfObject/AnalogInput0/sdfProperty/CurrentValue": {
-                  "ModbusAddress": { "const": 0 }
-                }
-              },
-              "sdfMerge": {
-                "0/sdfProperty/CurrentValue": {
-                  "ModbusAddress": { "const": 0 }
-                }
-              }
-            },
-            "AnalogInput1": {
-              "sdfRefWithMerge": "#/sdfObject/ControllerInput",
-              "sdfProperty": {
-                "CurrentValue": {
-                  "ModbusAddress": { "const": 1 }
-                }
-              }
-            },
-            "AnalogOutput": {
-              "sdfRef": "#/sdfObject/ControllerOutput"
-            },
-            "ControllerSetpoint": {
-              "sdfRef": "#/sdfObject/ControllerSetpoint",
-              "sdfProperty": {
-                "CurrentValue": {
-                  "fb:#/sdfQuality/ModbusAddress": { "const": 1020 }
-                }
-              }
-            },
-            "ControllerParameters": {
-              "sdfRef": "#/sdfObject/ControllerParameters",
-              "sdfProperty": {
-                "OpenCloseMode": {
-                  "fb:#/sdfQuality/ModbusAddress": { "const": 1000 }
-                },
-                "PidKpSetting": {
-                  "fb:#/sdfQuality/ModbusAddress": { "const": 1062 }
-                },
-                "PidKiSetting": {
-                  "fb:#/sdfQuality/ModbusAddress": { "const": 1064 }
-                },
-                "PidKdSetting": {
-                  "fb:#/sdfQuality/ModbusAddress": { "const": 1066 }
-                }
-              }
-            },
-            "ContactInput": {
-              "sdfRef": "#/sdfObject/ContactInput"
-            },
-            "CoilOutput": {
-              "sdfRef": "#/sdfObject/CoilOutput"
-            }
-          }
+          "sdfRef": "#/sdfThing/LoopController"
         },
         "LoopController1": {
-          "sdfRef": "#/sdfThing/LoopController",
-          "sdfMerge": { 
-            "0/sdfObject/AnalogInput0/sdfProperty/CurrentValue": { 
-              "ModbusAddress": { "const": 2 }
-            },
-            "0/sdfObject/AnalogOutput/sdfProperty/CurrentValue": { 
-              "ModbusAddress": { "const": 11 }
-            },
-            "0/sdfObject/ControllerSetpoint/sdfProperty/CurrentValue": { 
-              "ModbusAddress": { "const": 1276 }
-            }
-          }
+          "sdfRef": "#/sdfThing/LoopController"
+        }
+      }
+    },
+    "LoopController": {
+      "sdfObject": {
+        "AnalogInput0": {
+          "sdfRef": "#/sdfObject/ControllerInput"
         },
-        "LoopController": {
-          "sdfObject": {
-            "AnalogInput0": {
-              "sdfRef": "#/sdfObject/ControllerInput"
-            },
-            "AnalogInput1": {
-              "sdfRef": "#/sdfObject/ControllerInput"
-            },
-            "AnalogOutput": {
-              "sdfRef": "#/sdfObject/ControllerOutput"
-            },
-            "ControllerSetpoint": {
-              "sdfRef": "#/sdfObject/ControllerSetpoint"
-            },
-            "ControllerParameters": {
-              "sdfRef": "#/sdfObject/ontrollerParameters"
-            },
-            "ContactInput": {
-              "sdfRef": "#/sdfObject/ContactInput"
-            },
-            "CoilOutput": {
-              "sdfRef": "#/sdfObject/CoilOutput"
-            }
-          }
+        "AnalogInput1": {
+          "sdfRef": "#/sdfObject/ControllerInput"
+        },
+        "AnalogOutput": {
+          "sdfRef": "#/sdfObject/ControllerOutput"
+        },
+        "ControllerSetpoint": {
+          "sdfRef": "#/sdfObject/ControllerSetpoint"
+        },
+        "ControllerParameters": {
+          "sdfRef": "#/sdfObject/ontrollerParameters"
+        },
+        "ContactInput": {
+          "sdfRef": "#/sdfObject/ContactInput"
+        },
+        "CoilOutput": {
+          "sdfRef": "#/sdfObject/CoilOutput"
         }
       }
     }
