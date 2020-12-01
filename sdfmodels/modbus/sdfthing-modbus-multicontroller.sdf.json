@@ -61,13 +61,13 @@
                 "OpenCloseMode": {
                   "fb:#/sdfQuality/ModbusAddress": { "const": 1000 }
                 },
-                "PidKP": {
+                "PidKpSetting": {
                   "fb:#/sdfQuality/ModbusAddress": { "const": 1062 }
                 },
-                "PidKI": {
+                "PidKiSetting": {
                   "fb:#/sdfQuality/ModbusAddress": { "const": 1064 }
                 },
-                "PidKD": {
+                "PidKdSetting": {
                   "fb:#/sdfQuality/ModbusAddress": { "const": 1066 }
                 }
               }
