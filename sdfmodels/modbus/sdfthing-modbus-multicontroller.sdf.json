@@ -1,0 +1,141 @@
+{
+  "info": {
+    "title": "OneFB Modbus Dual RTU + PID Loop Controller", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+  "sdfThing": {
+    "DualLoopController": {
+      "sdfObject": {
+        "ThingInformation": {
+          "sdfProperty": {
+            "VendorName": { "const": "ADAM" },
+            "ModelName": { "const": "ADAM-4022T" },
+            "ProductDescription": { "const": "Dual Loop PID Controller" }
+          }
+        }
+      },
+      "sdfThing": {
+        "LoopController0": {
+          "sdfObject": {
+            "AnalogInput0": {
+              "sdfRef": "#/sdfObject/ControllerInput",
+              "sdfMapping": {
+                "#/sdfThing/DualLoopController/sdfThing/LoopController0/sdfObject/AnalogInput0/sdfProperty/CurrentValue": {
+                  "ModbusAddress": 0
+                }
+              }
+            },
+            "AnalogInput1": {
+              "sdfRef": "#/sdfObject/ControllerInput",
+              "sdfProperty": {
+                "CurrentValue": {
+                  "ModbusAddress": 1
+                }
+              }
+            },
+            "AnalogOutput": {
+              "sdfRef": "#/sdfObject/ControllerOutput"
+            },
+            "ControllerSetpoint": {
+              "sdfRef": "#/sdfObject/ControllerSetpoint",
+              "sdfProperty": {
+                "CurrentValue": {
+                  "ModbusAddress": 1020
+                }
+              }
+            },
+            "ControllerParameters": {
+              "sdfRef": "#/sdfObject/ControllerParameters"
+            },
+            "ContactInput": {
+              "sdfRef": "#/sdfObject/ContactInput"
+            },
+            "CoilOutput": {
+              "sdfRef": "#/sdfObject/CoilOutput"
+            }
+          }
+        },
+        "LoopController1": {
+          "sdfObject": {
+            "AnalogInput0": {
+              "sdfRef": "#/sdfObject/ControllerInput"
+            },
+            "AnalogInput1": {
+              "sdfRef": "#/sdfObject/ControllerInput"
+            },
+            "AnalogOutput": {
+              "sdfRef": "#/sdfObject/ControllerOutput"
+            },
+            "ControllerSetpoint": {
+              "sdfRef": "#/sdfObject/ControllerSetpoint"
+            },
+            "ControllerParameters": {
+              "sdfRef": "fb:#/sdfObject/ModbusPidControllerParameters"
+            },
+            "ContactInput": {
+              "sdfRef": "#/sdfObject/ContactInput"
+            },
+            "CoilOutput": {
+              "sdfRef": "#/sdfObject/CoilOutput"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sdfObject": {
+    "ControllerInput": {
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "Current Controller Input Value",
+          "label": "Current Input Value",
+          "type": "number",
+          "writable": false
+        }
+      }
+    },
+    "ControllerOutput": {
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "Current Controller Output Value",
+          "label": "Current Output Value",
+          "type": "number"
+        }
+      }
+    },
+    "ControllerSetpoint": {
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "Current Controller Setpoint Value",
+          "label": "Current Setpoint Value",
+          "sdfRef": "fb:#/sdfObject/ModbusPidControllerParameters/sdfProperty/SetpointValue"
+        }
+      }
+    },
+    "ContactInput": {
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "Current Value",
+          "label": "Current Value",
+          "type": "boolean",
+          "writable": false
+        }
+      }
+    },
+    "CoilOutput": {
+      "sdfProperty": {
+        "CurrentValue": {
+          "description": "Current Value",
+          "label": "Contact Input",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
