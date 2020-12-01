@@ -81,6 +81,20 @@
           }
         },
         "LoopController1": {
+          "sdfRef": "#/sdfThing/LoopController",
+          "sdfMerge": { 
+            "0/sdfObject/AnalogInput0/sdfProperty/CurrentValue": { 
+              "ModbusAddress": { "const": 2 }
+            },
+            "0/sdfObject/AnalogOutput/sdfProperty/CurrentValue": { 
+              "ModbusAddress": { "const": 11 }
+            },
+            "0/sdfObject/ControllerSetpoint/sdfProperty/CurrentValue": { 
+              "ModbusAddress": { "const": 1276 }
+            }
+          }
+        },
+        "LoopController": {
           "sdfObject": {
             "AnalogInput0": {
               "sdfRef": "#/sdfObject/ControllerInput"
@@ -186,7 +200,8 @@
         },
         "InvalidCalibration": { 
           "label": "Invalid Calibration",
-          "const": 3 }
+          "const": 3 
+        }
       }
     }
   }
