@@ -48,7 +48,7 @@
               "sdfRef": "#/sdfObject/ControllerOutput"
             },
             "ControllerSetpoint": {
-              "sdfRefWithMergePatch": "#/sdfObject/ControllerSetpoint",
+              "sdfRef": "#/sdfObject/ControllerSetpoint",
               "sdfProperty": {
                 "CurrentValue": {
                   "fb:#/sdfQuality/ModbusAddress": { "const": 1020 }
