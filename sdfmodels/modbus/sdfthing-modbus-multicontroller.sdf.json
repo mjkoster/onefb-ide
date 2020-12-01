@@ -56,7 +56,21 @@
               }
             },
             "ControllerParameters": {
-              "sdfRef": "#/sdfObject/ControllerParameters"
+              "sdfRef": "#/sdfObject/ControllerParameters",
+              "sdfProperty": {
+                "OpenCloseMode": {
+                  "fb:#/sdfQuality/ModbusAddress": { "const": 1000 }
+                },
+                "PidKP": {
+                  "fb:#/sdfQuality/ModbusAddress": { "const": 1062 }
+                },
+                "PidKI": {
+                  "fb:#/sdfQuality/ModbusAddress": { "const": 1064 }
+                },
+                "PidKD": {
+                  "fb:#/sdfQuality/ModbusAddress": { "const": 1066 }
+                }
+              }
             },
             "ContactInput": {
               "sdfRef": "#/sdfObject/ContactInput"
@@ -81,7 +95,7 @@
               "sdfRef": "#/sdfObject/ControllerSetpoint"
             },
             "ControllerParameters": {
-              "sdfRef": "fb:#/sdfObject/ModbusPidControllerParameters"
+              "sdfRef": "#/sdfObject/ontrollerParameters"
             },
             "ContactInput": {
               "sdfRef": "#/sdfObject/ContactInput"
@@ -98,30 +112,42 @@
     "ControllerInput": {
       "sdfProperty": {
         "CurrentValue": {
-          "description": "Current Controller Input Value",
+          "description": "Current Controller Input (PV) Value",
           "label": "Current Input Value",
           "type": "number",
           "writable": false
+        },
+        "CurrentStatusCode": {
+          "sdfRef": "#/sdfData/AnalogInputStatusCode"
+        },
+        "RangeCode": {
+          "sdfRef": "#/sdfObject/ontrollerParameters/sdfData/PvRangeType"
         }
       }
     },
     "ControllerOutput": {
       "sdfProperty": {
         "CurrentValue": {
-          "description": "Current Controller Output Value",
+          "description": "Current Controller Output (MV) Value",
           "label": "Current Output Value",
           "type": "number"
+        },
+        "RangeCode": {
+          "sdfRef": "#/sdfObject/ControllerParameters/sdfData/MvRangeType"
         }
       }
     },
     "ControllerSetpoint": {
       "sdfProperty": {
         "CurrentValue": {
-          "description": "Current Controller Setpoint Value",
+          "description": "Current Controller Setpoint (SV) Value",
           "label": "Current Setpoint Value",
-          "sdfRef": "fb:#/sdfObject/ModbusPidControllerParameters/sdfProperty/SetpointValue"
+          "sdfRef": "#/sdfObject/ControllerParameters/sdfProperty/SetpointValue"
         }
       }
+    },
+    "ControllerParameters": {
+      "sdfRef": "fb:#/sdfObject/ModbusPidControllerParameters"
     },
     "ContactInput": {
       "sdfProperty": {
@@ -140,6 +166,27 @@
           "label": "Contact Input",
           "type": "boolean"
         }
+      }
+    }
+  },
+  "sdfData": {
+    "AnalogInputStatusCode": {
+      "sdfChoice": {
+        "Normal": { 
+          "label": "Normal",
+          "const": 0 
+        },
+        "OverHigh": { 
+          "label": "Over High",
+          "const": 1 
+        },
+        "OverLow": { 
+          "label": "Over Low",
+          "const": 2 
+        },
+        "InvalidCalibration": { 
+          "label": "Invalid Calibration",
+          "const": 3 }
       }
     }
   }
