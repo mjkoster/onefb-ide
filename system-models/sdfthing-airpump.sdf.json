@@ -1,0 +1,33 @@
+{
+  "info": {
+    "title": "Air Pump", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+  
+  "sdfThing": {
+    "AirSupplyUnit": {},
+    "AirPump": {
+      "description": "Air Pump",
+      "label": "Air Pump",
+      "sdfObject": {
+        "InletPort": {},
+        "OutletPort": {},
+        "CompressorParameters": {},
+        "ElectricMotor": {},
+        "ManufacturerData": {
+          "sdfRef": "fb:#/sdfObject/ManufacturerData",
+          "ManufacturerName": ""
+        },
+        "GraphicSymbol": {}
+      }
+    },
+    "AirInletFilter": {},
+    ""
+  }
+}
