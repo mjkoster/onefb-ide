@@ -59,8 +59,7 @@
       { "Wait": true }
     ],
     "Wait": [
-      { "Sample": "#/sdfEvent/CurrentValueSample"},
-      { "Wait": true }
+      { "Sample": "#/sdfEvent/CurrentValueSample"}
     ],
     "Notify": [
       { "LastReportTime": "SampleTime" },
@@ -69,7 +68,6 @@
       { "Wait": true }
     ],
     "Stop": [
-      { "Stop": true }
     ]
   }
 }

@@ -14,9 +14,11 @@
     "Boolean": [ "StandbyButton", "RunButton", "StopButton", "Standby", "Run", "Stop" ]
   },
   "stcStateTransitionTrigger": { 
+    "stcStart": "Init",
+    "stcStop": "End",
     "Scan": "Scan",
     "Update": "Update" ,
-    "wait": "wait"
+    "Wait": "Wait"
   },
   "stcSetter": { 
     "Standby": "#/sdfProperty/C104",
@@ -46,8 +48,9 @@
       { "Wait": true }
     ],
     "Wait": [
-      { "Scan": "#/sdfEvent/ScanSync"},
-      { "Wait": true }
+      { "Scan": "#/sdfEvent/ScanSync"}
+    ],
+    "End": [
     ]
   }
 }
