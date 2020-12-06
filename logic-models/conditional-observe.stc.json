@@ -39,10 +39,10 @@
           { "Wait": true }
         ],
         "Wait": [
-          { "Sample": "#/sdfEvent/CurrentValueSample"}
+          { "Sample": { "stcWait": "#/sdfEvent/CurrentValueSample" } }
         ],
         "Notify": [
-          { "ReportValue": { "CurrentValue": "Value", "SampleTime": "SampleTime" } },
+          { "ReportValue": { "sdfOutputData/CurrentValue": "Value", "sdfOutputData/SampleTime": "SampleTime" } },
           { "LastReportedValue": "Value" },
           { "LastReportTime": "SampleTime" },
           { "Wait": true }
