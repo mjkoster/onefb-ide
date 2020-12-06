@@ -10,8 +10,13 @@
   }, 
   "defaultNamespace": "fb", 
   
-  "stcType": {
-    "Boolean": [ "StandbyButton", "RunButton", "StopButton", "Standby", "Run", "Stop" ]
+  "stcData": {
+    "StandbyButton": { "type": "boolean" }, 
+    "RunButton": { "type": "boolean" }, 
+    "StopButton": { "type": "boolean" }, 
+    "Standby": { "type": "boolean" }, 
+    "Run": { "type": "boolean" }, 
+    "Stop": { "type": "boolean" }
   },
   "stcStateTransitionTrigger": { 
     "stcStart": "Init",
@@ -27,30 +32,41 @@
   },
   "stcStates": {
     "Init": [
-      { "StandbyButton": "#/sdfProperty/C101" },
-      { "RunButton": "#/sdfProperty/C102" },
-      { "StopButton": "#/sdfProperty/C103" },
-      { "Standby": false },
-      { "Run": false },
-      { "Stop": true },
+      { 
+        "StandbyButton": "#/sdfProperty/C101" ,
+        "RunButton": "#/sdfProperty/C102" ,
+        "StopButton": "#/sdfProperty/C103" ,
+        "Standby": false ,
+        "Run": false ,
+        "Stop": true
+      },
       { "Scan": true }
     ],
     "Scan": [
-      { "StandbyButton": "#/sdfProperty/C101" },
-      { "RunButton": "#/sdfProperty/C102" },
-      { "StopButton": "#/sdfProperty/C103" },
+      { 
+        "StandbyButton": "#/sdfProperty/C101" ,
+        "RunButton": "#/sdfProperty/C102" ,
+        "StopButton": "#/sdfProperty/C103" 
+      },
       { "Update": true }    
     ],
     "Update": [
-      { "Standby": "( StandbyButton && !RunButton && !StopButton ) || ( Standby && !RunButton && !StopButton && !Stop )" },
-      { "Run": "( RunButton && !StandbyButton && !StopButton && Standby ) || ( Run && !StandbyButton && !StopButton && !Stop )" },
-      { "Stop": "( StopButton || ( Stop && !StandbyButton )" },
+      { 
+        "Standby": "( StandbyButton && !RunButton && !StopButton ) || ( Standby && !RunButton && !StopButton && !Stop )" ,
+        "Run": "( RunButton && !StandbyButton && !StopButton && Standby ) || ( Run && !StandbyButton && !StopButton && !Stop )" ,
+        "Stop": "( StopButton || ( Stop && !StandbyButton )" 
+      },
       { "Wait": true }
     ],
     "Wait": [
-      { "Scan": "#/sdfEvent/ScanSync"}
+      { "Scan": "#/sdfEvent/ScanSync" }
     ],
     "End": [
+      { 
+        "Standby": false,
+        "Run": false ,
+        "Stop": true 
+      }
     ]
   }
 }
