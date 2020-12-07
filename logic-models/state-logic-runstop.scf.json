@@ -1,0 +1,72 @@
+{
+  "info": {
+    "title": "Run Stop Standby momentary button logic state control", 
+    "version": "2020-11-23", 
+    "copyright": "Copyright 2020, Michael J. Koster\n        All rights reserved.", 
+    "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+  }, 
+  "namespace": {
+    "fb": "https://onedm.org/exploratory/onefb/"
+  }, 
+  "defaultNamespace": "fb", 
+  
+  "scfStates": {
+    "scfInit": [
+      { 
+        "Standby": false ,
+        "Run": false ,
+        "Stop": true
+      },
+      { "StopState": true }
+    ],
+    "StopState": [
+      { 
+        "Standby": false,
+        "Run": false ,
+        "Stop": true 
+      },
+      { 
+        "StandbyState": { "scfWhen": "( StandbyButton && !RunButton && !StopButton )" }
+      } 
+    ],
+    "StandbyState": [
+      { 
+        "Standby": true,
+        "Run": false ,
+        "Stop": false 
+      },
+      { 
+        "RunState": { "scfWhen": "( RunButton && !StandbyButton && !StopButton )" },
+        "StopState": { "scfWhen": "( StopButton )" }
+      }
+    ],
+    "RunState": [
+      { 
+        "Standby": false,
+        "Run": true ,
+        "Stop": false 
+      },
+      { 
+        "StandbyState": { "scfWhen": "( StandbyButton && !RunButton && !StopButton )" },
+        "StopState": { "scfWhen": "( StopButton )" }
+      }
+    ],
+    "scfHalt": [
+      { 
+        "Standby": false,
+        "Run": false ,
+        "Stop": true 
+      }
+    ]
+  },
+  "scfData": {
+    "StandbyButton": "#/sdfProperty/C101" ,
+    "RunButton": "#/sdfProperty/C102" ,
+    "StopButton": "#/sdfProperty/C103"
+},
+  "scfSetter": { 
+    "Standby": "#/sdfProperty/C104",
+    "Run": "#/sdfProperty/C105",
+    "Stop": "#/sdfProperty/C106" 
+  }
+}

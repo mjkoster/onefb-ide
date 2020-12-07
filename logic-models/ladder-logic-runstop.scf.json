@@ -10,8 +10,8 @@
   }, 
   "defaultNamespace": "fb", 
   
-  "stcStates": {
-    "Init": [
+  "scfStates": {
+    "scfInit": [
       { 
         "StandbyButton": "#/sdfProperty/C101" ,
         "RunButton": "#/sdfProperty/C102" ,
@@ -39,9 +39,9 @@
       { "Wait": true }
     ],
     "Wait": [
-      { "Scan": { "stcWait": "#/sdfEvent/ScanSync" } }
+      { "Scan": { "scfWait": "#/sdfEvent/ScanSync" } }
     ],
-    "End": [
+    "scfHalt": [
       { 
         "Standby": false,
         "Run": false ,
@@ -49,22 +49,12 @@
       }
     ]
   },
-  "stcData": {
+  "scfData": {
     "StandbyButton": { "type": "boolean" }, 
     "RunButton": { "type": "boolean" }, 
-    "StopButton": { "type": "boolean" }, 
-    "Standby": { "type": "boolean" }, 
-    "Run": { "type": "boolean" }, 
-    "Stop": { "type": "boolean" }
+    "StopButton": { "type": "boolean" }
   },
-  "stcStateTransitionTrigger": { 
-    "stcStart": "Init",
-    "stcStop": "End",
-    "Scan": "Scan",
-    "Update": "Update" ,
-    "Wait": "Wait"
-  },
-  "stcSetter": { 
+  "scfSetter": { 
     "Standby": "#/sdfProperty/C104",
     "Run": "#/sdfProperty/C105",
     "Stop": "#/sdfProperty/C106" 

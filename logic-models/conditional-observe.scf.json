@@ -10,10 +10,10 @@
   }, 
   "defaultNamespace": "fb", 
 
-  "stcStateMachine": {
+  "scfStateMachine": {
     "ConditionalObserveFilter": {
-      "stcStates": {
-        "Init": [
+      "scfStates": {
+        "scfInit": [
           { "Band": "#/sdfProperty/Band" },
           { "Pmin": "#/sdfProperty/Pmin" },
           { "Pmax": "#/sdfProperty/Pmax" },
@@ -39,7 +39,7 @@
           { "Wait": true }
         ],
         "Wait": [
-          { "Sample": { "stcWait": "#/sdfEvent/CurrentValueSample" } }
+          { "Sample": { "scfWait": "#/sdfEvent/CurrentValueSample" } }
         ],
         "Notify": [
           { "ReportValue": { "sdfOutputData/CurrentValue": "Value", "sdfOutputData/SampleTime": "SampleTime" } },
@@ -47,19 +47,18 @@
           { "LastReportTime": "SampleTime" },
           { "Wait": true }
         ],
-        "Stop": [
-        ]
+        "scfHalt": []
       },
-      "stcData": {
-        "SampleTime": { "sdfRef": "fb:#/sdfData/DateTimeType" },
-        "LastReportTime": { "sdfRef": "fb:#/sdfData/DateTimeType" },
-        "Pmin": { "sdfRef": "fb:#/sdfData/DurationType" }, 
-        "Pmax": { "sdfRef": "fb:#/sdfData/DurationType" },
-        "Value": { "sdfRef": "fb:#/sdfData/ValueType" }, 
-        "LastReportedValue": { "sdfRef": "fb:#/sdfData/ValueType" }, 
-        "St": { "sdfRef": "fb:#/sdfData/ValueType" }, 
-        "Lt": { "sdfRef": "fb:#/sdfData/ValueType" }, 
-        "Gt": { "sdfRef": "fb:#/sdfData/ValueType" },
+      "scfData": {
+        "SampleTime": { "sdfRef": "fb:#/sdfData/ScalarTimeType" },
+        "LastReportTime": { "sdfRef": "fb:#/sdfData/ScalarTimeType" },
+        "Pmin": { "sdfRef": "fb:#/sdfData/ScalarDurationType" }, 
+        "Pmax": { "sdfRef": "fb:#/sdfData/ScalarDurationType" },
+        "Value": { "sdfRef": "fb:#/sdfData/ScalarValueType" }, 
+        "LastReportedValue": { "sdfRef": "fb:#/sdfData/ScalarValueType" }, 
+        "St": { "sdfRef": "fb:#/sdfData/ScalarValueType" }, 
+        "Lt": { "sdfRef": "fb:#/sdfData/ScalarValueType" }, 
+        "Gt": { "sdfRef": "fb:#/sdfData/ScalarValueType" },
         "Band": { "type": "boolean" }, 
         "PminEx": { "type": "boolean" }, 
         "PmaxEx": { "type": "boolean" }, 
@@ -67,15 +66,7 @@
         "GtEx": { "type": "boolean" }, 
         "StEx": { "type": "boolean" }
       },
-      "stcStateTransitionTrigger": {
-        "stcStart": "Init",
-        "stcStop": "Stop",
-        "Stop": "Stop",
-        "Sample": "Sample",
-        "Notify": "Notify",
-        "Wait": "Wait"
-      },
-      "stcSetter": { 
+      "scfSetter": { 
         "ReportValue": "#/sdfEvent/ReportValue" 
       }
     }
