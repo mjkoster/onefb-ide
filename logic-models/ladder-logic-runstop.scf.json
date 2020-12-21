@@ -10,53 +10,57 @@
   }, 
   "defaultNamespace": "fb", 
   
-  "scfStates": {
-    "scfInit": [
-      { 
-        "StandbyButton": "#/sdfProperty/C101" ,
-        "RunButton": "#/sdfProperty/C102" ,
-        "StopButton": "#/sdfProperty/C103" ,
-        "Standby": false ,
-        "Run": false ,
-        "Stop": true
+  "scfStateControl": {
+    "RunStopControlLadder": {
+      "scfState": {
+        "scfInit": [
+          { 
+            "StandbyButton": "#/sdfProperty/C101" ,
+            "RunButton": "#/sdfProperty/C102" ,
+            "StopButton": "#/sdfProperty/C103" ,
+            "Standby": false ,
+            "Run": false ,
+            "Stop": true
+          },
+          { "Scan": true }
+        ],
+        "Scan": [
+          { 
+            "StandbyButton": "#/sdfProperty/C101" ,
+            "RunButton": "#/sdfProperty/C102" ,
+            "StopButton": "#/sdfProperty/C103" 
+          },
+          { "Update": true }    
+        ],
+        "Update": [
+          { 
+            "Standby": "( StandbyButton && !RunButton && !StopButton ) || ( Standby && !RunButton && !StopButton && !Stop )" ,
+            "Run": "( RunButton && !StandbyButton && !StopButton && Standby ) || ( Run && !StandbyButton && !StopButton && !Stop )" ,
+            "Stop": "( StopButton || ( Stop && !StandbyButton )" 
+          },
+          { "Wait": true }
+        ],
+        "Wait": [
+          { "Scan": { "scfWait": "#/sdfEvent/ScanSync" } }
+        ],
+        "scfHalt": [
+          { 
+            "Standby": false,
+            "Run": false ,
+            "Stop": true 
+          }
+        ]
       },
-      { "Scan": true }
-    ],
-    "Scan": [
-      { 
-        "StandbyButton": "#/sdfProperty/C101" ,
-        "RunButton": "#/sdfProperty/C102" ,
-        "StopButton": "#/sdfProperty/C103" 
+      "scfData": {
+        "StandbyButton": { "type": "boolean" }, 
+        "RunButton": { "type": "boolean" }, 
+        "StopButton": { "type": "boolean" }
       },
-      { "Update": true }    
-    ],
-    "Update": [
-      { 
-        "Standby": "( StandbyButton && !RunButton && !StopButton ) || ( Standby && !RunButton && !StopButton && !Stop )" ,
-        "Run": "( RunButton && !StandbyButton && !StopButton && Standby ) || ( Run && !StandbyButton && !StopButton && !Stop )" ,
-        "Stop": "( StopButton || ( Stop && !StandbyButton )" 
-      },
-      { "Wait": true }
-    ],
-    "Wait": [
-      { "Scan": { "scfWait": "#/sdfEvent/ScanSync" } }
-    ],
-    "scfHalt": [
-      { 
-        "Standby": false,
-        "Run": false ,
-        "Stop": true 
+      "scfSetter": { 
+        "Standby": "#/sdfProperty/C104",
+        "Run": "#/sdfProperty/C105",
+        "Stop": "#/sdfProperty/C106" 
       }
-    ]
-  },
-  "scfData": {
-    "StandbyButton": { "type": "boolean" }, 
-    "RunButton": { "type": "boolean" }, 
-    "StopButton": { "type": "boolean" }
-  },
-  "scfSetter": { 
-    "Standby": "#/sdfProperty/C104",
-    "Run": "#/sdfProperty/C105",
-    "Stop": "#/sdfProperty/C106" 
+    }
   }
 }

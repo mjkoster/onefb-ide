@@ -10,63 +10,67 @@
   }, 
   "defaultNamespace": "fb", 
   
-  "scfStates": {
-    "scfInit": [
-      { 
-        "Standby": false ,
-        "Run": false ,
-        "Stop": true
+  "scfStateControl": {
+    "RunStopControl": {
+      "scfState": {
+        "scfInit": [
+          { 
+            "Standby": false ,
+            "Run": false ,
+            "Stop": true
+          },
+          { "StopState": true }
+        ],
+        "StopState": [
+          { 
+            "Standby": false,
+            "Run": false ,
+            "Stop": true 
+          },
+          { 
+            "StandbyState": { "scfWhen": "( StandbyButton && !RunButton && !StopButton )" }
+          } 
+        ],
+        "StandbyState": [
+          { 
+            "Standby": true,
+            "Run": false ,
+            "Stop": false 
+          },
+          { 
+            "RunState": { "scfWhen": "( RunButton && !StandbyButton && !StopButton )" },
+            "StopState": { "scfWhen": "( StopButton )" }
+          }
+        ],
+        "RunState": [
+          { 
+            "Standby": false,
+            "Run": true ,
+            "Stop": false 
+          },
+          { 
+            "StandbyState": { "scfWhen": "( StandbyButton && !RunButton && !StopButton )" },
+            "StopState": { "scfWhen": "( StopButton )" }
+          }
+        ],
+        "scfHalt": [
+          { 
+            "Standby": false,
+            "Run": false ,
+            "Stop": true 
+          }
+        ]
       },
-      { "StopState": true }
-    ],
-    "StopState": [
-      { 
-        "Standby": false,
-        "Run": false ,
-        "Stop": true 
+      "scfData": {
+        "StandbyButton": "#/sdfProperty/C101" ,
+        "RunButton": "#/sdfProperty/C102" ,
+        "StopButton": "#/sdfProperty/C103"
       },
-      { 
-        "StandbyState": { "scfWhen": "( StandbyButton && !RunButton && !StopButton )" }
-      } 
-    ],
-    "StandbyState": [
-      { 
-        "Standby": true,
-        "Run": false ,
-        "Stop": false 
-      },
-      { 
-        "RunState": { "scfWhen": "( RunButton && !StandbyButton && !StopButton )" },
-        "StopState": { "scfWhen": "( StopButton )" }
-      }
-    ],
-    "RunState": [
-      { 
-        "Standby": false,
-        "Run": true ,
-        "Stop": false 
-      },
-      { 
-        "StandbyState": { "scfWhen": "( StandbyButton && !RunButton && !StopButton )" },
-        "StopState": { "scfWhen": "( StopButton )" }
-      }
-    ],
-    "scfHalt": [
-      { 
-        "Standby": false,
-        "Run": false ,
-        "Stop": true 
-      }
-    ]
-  },
-  "scfData": {
-    "StandbyButton": "#/sdfProperty/C101" ,
-    "RunButton": "#/sdfProperty/C102" ,
-    "StopButton": "#/sdfProperty/C103"
-},
-  "scfSetter": { 
-    "Standby": "#/sdfProperty/C104",
-    "Run": "#/sdfProperty/C105",
-    "Stop": "#/sdfProperty/C106" 
+      "scfSetter": { 
+        "Standby": "#/sdfProperty/C104",
+        "Run": "#/sdfProperty/C105",
+        "Stop": "#/sdfProperty/C106" 
+      }    
+    }
   }
 }

@@ -10,9 +10,9 @@
   }, 
   "defaultNamespace": "fb", 
 
-  "scfStateMachine": {
+  "scfStateControl": {
     "ConditionalObserveFilter": {
-      "scfStates": {
+      "scfState": {
         "scfInit": [
           { "Band": "#/sdfProperty/Band" },
           { "Pmin": "#/sdfProperty/Pmin" },
