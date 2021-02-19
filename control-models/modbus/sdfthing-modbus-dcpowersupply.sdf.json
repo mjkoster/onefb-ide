@@ -42,7 +42,7 @@
               "size": 1,
               "description": "Voltage Set Point Value",
               "label": "Set-U",
-              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageDataType",
+              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageData",
               "writable": true
             }
           },
@@ -51,7 +51,7 @@
               "regid": "1000",
               "sdfInputData":{
                 "size": 1,
-                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageDataType"
+                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageData"
               }
             }
           }
@@ -63,7 +63,7 @@
               "size": 1,
               "description": "Amperage Set Point Value",
               "label": "Set-I",
-              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageDataType",
+              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageData",
               "writable": true
             }
           },
@@ -72,7 +72,7 @@
               "regid": "1001",
               "sdfInputData":{
                 "size": 1,
-                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageDataType"
+                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageData"
               }
             }
           }
@@ -84,7 +84,7 @@
               "size": 1,
               "description": "Voltage  Measurement Value",
               "label": "U",
-              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageDataType",
+              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageData",
               "writable": false
             }
           }
@@ -96,7 +96,7 @@
               "size": 1,
               "description": "Amperage Measurement Value",
               "label": "I",
-              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageDataType",
+              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageData",
               "writable": false         
             }
           }
@@ -108,7 +108,7 @@
             "OperationalState": {
               "regid": "1004",
               "size": 1,
-              "sdfRef": "#/sdfData/OperationalStateDataType",
+              "sdfRef": "#/sdfData/OperationalState",
               "writable": false
             }
           }
@@ -120,8 +120,16 @@
             "RegulationState": {
               "regid": "1005",
               "size": 1,
-              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/RegulationStateDataType",
+              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/RegulationState",
               "writable": false
+            }
+          },
+          "sdfEvent": {
+            "OverCurrent": {
+              "description": "Over Current Event",
+              "sdfOutputData": {
+                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/RegulationState/sdfChoice/OverCurrent"
+              }
             }
           }
         },
@@ -132,7 +140,7 @@
             "OperationalSetting": {
               "regid": "1006",
               "size": 1,
-              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalStateDataType",
+              "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState",
               "writable": true
             }
           },
@@ -141,16 +149,14 @@
               "regid": "1006",
               "sdfInputData": {
                 "size": 1,
-                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalStateDataType",
-                "const": 1
+                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState/sdfChoice/Run"
               }
             },
             "Stop": {
               "regid": "1006",
               "sdfInputData": {
                 "size": 1,
-                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalStateDataType",
-                "const": 0
+                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState/sdfChoice/Stop"
               }
             }
           }
@@ -195,41 +201,41 @@
         }
       },
       "sdfData": {
-        "VoltageDataType": {
+        "VoltageData": {
           "type": "number",
           "minimum": 0,
           "maximum": 30,
           "multipleOf": 0.01
         },
-        "AmperageDataType": {
+        "AmperageData": {
           "type": "number",
           "minimum": 0,
           "maximum": 10,
           "multipleOf": 0.01
         },
-        "OperationalStateDataType": {
+        "OperationalState": {
           "sdfChoice": {
-            "Running": {
-              "label": "Running",
+            "Run": {
+              "label": "Run",
               "const": 1 
             },
-            "Stopped": { 
-              "label": "Stopped",
+            "Stop": { 
+              "label": "Stop",
               "const": 0 
             }
           }
         },
-        "RegulationStateDataType": {
+        "RegulationState": {
           "sdfChoice": {
-            "ConstantCurrentRegulationState": {
+            "ConstantCurrent": {
               "label": "CC",
               "const": 0 
             },
-            "ConstantVoltageRegulationState": {
+            "ConstantVoltage": {
               "label": "CV",
               "const": 1 
             },
-            "OvercurrentState": {
+            "Overcurrent": {
               "label": "OC",
               "const": 2 
             }
