@@ -1,22 +1,27 @@
 {
   "info": {
     "title": "Modbus DC Power Supply", 
-    "version": "2021-02-26", 
+    "version": "2021-02-18", 
     "copyright": "Copyright 2021, Michael J. Koster. All rights reserved.", 
     "license": "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
   }, 
   "namespace": {
-    "fb": "https://onedm.org/exploratory/onefb/",
-    "pg": "https://onedm.org/playground/"
+    "fb": "https://onedm.org/exploratory/onefb/"
   }, 
   "defaultNamespace": "fb", 
 
   "sdfExtension": {
-    "DataSchema" : { 
-      "description": "Additional data schema constraints and mappings for sdfData declarations"
+    "regid" : { 
+      "description": "Modbus Register ID",
+      "type": "string", 
+      "pattern": "^[A-Fa-f0-9]",
+      "maxLength": 4
     },
-    "Form": {
-      "description": "Protocol Binding Form compatible with WoT TD Form"
+    "size": {
+      "description": "Size in Modbus register Units of 2 octets each",
+      "type": "number",
+      "minimum": 1,
+      "maximum": 128
     }
   },
 
@@ -33,6 +38,8 @@
         "VoltageSetPoint": {
           "sdfProperty": {
             "VoltageSetPoint": {
+              "regid": "1000",
+              "size": 1,
               "description": "Voltage Set Point Value",
               "label": "Set-U",
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageData",
@@ -41,6 +48,7 @@
           },
           "sdfAction": {
             "SetVoltage": {
+              "regid": "1000",
               "sdfInputData":{
                 "size": 1,
                 "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageData"
@@ -51,6 +59,8 @@
         "AmperageSetPoint": {
           "sdfProperty": {
             "AmperageSetPoint": {
+              "regid": "1001",
+              "size": 1,
               "description": "Amperage Set Point Value",
               "label": "Set-I",
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageData",
@@ -59,7 +69,9 @@
           },
           "sdfAction": {
             "SetAmperage": {
+              "regid": "1001",
               "sdfInputData":{
+                "size": 1,
                 "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageData"
               }
             }
@@ -68,6 +80,8 @@
         "VoltageMeasurement": {
           "sdfProperty": {
             "MeasuredVolts": {
+              "regid": "1002",
+              "size": 1,
               "description": "Voltage  Measurement Value",
               "label": "U",
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/VoltageData",
@@ -78,6 +92,8 @@
         "AmperageMeasurement": {
           "sdfProperty": {
             "MeasuredAmps": {
+              "regid": "1003",
+              "size": 1,
               "description": "Amperage Measurement Value",
               "label": "I",
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/AmperageData",
@@ -90,6 +106,8 @@
           "label": "Current operational State",
           "sdfProperty": {
             "OperationalState": {
+              "regid": "1004",
+              "size": 1,
               "sdfRef": "#/sdfData/OperationalState",
               "writable": false
             }
@@ -100,6 +118,8 @@
           "label": "Regulation State",
           "sdfProperty": {
             "RegulationState": {
+              "regid": "1005",
+              "size": 1,
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/RegulationState",
               "writable": false
             }
@@ -118,17 +138,24 @@
           "label": "Current operational State",
           "sdfProperty": {
             "OperationalSetting": {
+              "regid": "1006",
+              "size": 1,
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState",
               "writable": true
             }
           },
           "sdfAction": {
             "Start": {
+              "regid": "1006",
               "sdfInputData": {
-                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState/sdfChoice/Run"              }
+                "size": 1,
+                "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState/sdfChoice/Run"
+              }
             },
             "Stop": {
+              "regid": "1006",
               "sdfInputData": {
+                "size": 1,
                 "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/OperationalState/sdfChoice/Stop"
               }
             }
@@ -139,13 +166,17 @@
           "label": "Modbus Address",
           "sdfProperty": {
             "ModbusAddress": {
+              "regid": "1008",
+              "size": 1,
               "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/ModbusUnitID",
               "writable": true
             }
           },
           "sdfAction": {
             "SetAddress": {
+              "regid": "1008",
               "sdfInputData": {
+                "size": 1,
                 "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/ModbusUnitID"
               }
             }
@@ -154,6 +185,8 @@
         "RegisterBlock": {
           "description": "Register Block for ReadMultiple",
           "sdfProperty": {
+            "regid": "1000",
+            "size": 7,
             "type": "array",
             "items": [
               "#/sdfThing/DCPowerSupply/sdfObject/VoltageSetPoint/sdfProperty/VoltageSetPoint",
@@ -170,14 +203,12 @@
       "sdfData": {
         "VoltageData": {
           "type": "number",
-          "units": "V",
           "minimum": 0,
           "maximum": 30,
           "multipleOf": 0.01
         },
         "AmperageData": {
           "type": "number",
-          "units": "A",
           "minimum": 0,
           "maximum": 10,
           "multipleOf": 0.01
