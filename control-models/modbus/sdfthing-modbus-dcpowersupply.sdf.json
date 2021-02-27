@@ -16,9 +16,9 @@
       "description": "Additional data schema constraints and mappings for sdfData declarations",
       "sdfRef": "#/sdfExtensionSchema/DataSchema"
     },
-    "ProtocolBinding": {
+    "WotProtocolBinding": {
       "description": "Protocol Binding Form compatible with WoT TD Form",
-      "sdfRef": "#/sdfExtensionSchema/ProtocolBinding"
+      "sdfRef": "#/sdfExtensionSchema/WotProtocolBinding"
     }
   },
 
@@ -44,10 +44,10 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
-                "modv:unitID": "1",
+                "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
                 "modv:offset": "1000",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -71,7 +71,7 @@
               "sdfInputData":{
                 "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/VoltageData"
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -94,7 +94,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -121,7 +121,7 @@
               "sdfInputData":{
                 "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/AmperageData"
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -144,7 +144,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
                 "modv:offset": "1002",
@@ -165,7 +165,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
                 "modv:offset": "1003",
@@ -185,7 +185,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
                 "modv:offset": "1004",
@@ -207,7 +207,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
                 "modv:offset": "1005",
@@ -235,7 +235,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -253,7 +253,7 @@
               "sdfInputData": {
                 "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/OperationalState/sdfChoice/Run"              
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -287,7 +287,7 @@
               "DataSchema": {
                 "WidthInBits": 16
               },
-              "ProtocolBinding": [
+              "WotProtocolBinding": [
                 {
                   "op": "writeproperty",
                   "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
@@ -312,7 +312,7 @@
               "sdfInputData": {
                 "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ModbusUnitID"
               },
-              "ProtocolBinding": {
+              "WotProtocolBinding": {
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -336,7 +336,7 @@
               "#/sdfThing/DCPowerSupply_LW3010E/sdfObject/RegulationState/sdfProperty/RegulationState",
               "#/sdfThing/DCPowerSupply_LW3010E/sdfObject/OperationalSetting/sdfProperty/currentMachineState"
             ],
-            "ProtocolBinding": {
+            "WotProtocolBinding": {
               "op": "ReadProperty",
               "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
               "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
