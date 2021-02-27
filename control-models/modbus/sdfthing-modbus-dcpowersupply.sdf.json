@@ -41,6 +41,9 @@
               "label": "Set-U",
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/VoltageData",
               "writable": true,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
@@ -88,6 +91,9 @@
               "label": "Set-I",
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/AmperageData",
               "writable": true,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
@@ -135,6 +141,9 @@
               "label": "U",
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/VoltageData",
               "writable": false,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -153,6 +162,9 @@
               "label": "I",
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/AmperageData",
               "writable": false,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -170,6 +182,9 @@
             "currentMachineState": {
               "sdfRef": "#sdfThing/DCPowerSupply_LW3010E/sdfData/OperationalState",
               "writable": false,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -189,6 +204,9 @@
             "RegulationState": {
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/RegulationState",
               "writable": false,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
@@ -214,6 +232,9 @@
             "currentMachineState": {
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/OperationalState",
               "writable": true,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": {
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
@@ -263,6 +284,9 @@
             "ModbusAddress": {
               "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ModbusUnitID",
               "writable": true,
+              "DataSchema": {
+                "WidthInBits": 16
+              },
               "ProtocolBinding": [
                 {
                   "op": "writeproperty",
@@ -378,7 +402,7 @@
           "const": 1
         },
         "ThisIPAddress": {
-          "const": "tcp+modbus://192.168.1.1:502/"
+          "const": "modbus+tcp://192.168.1.1:502/"
         }
       }
     }
