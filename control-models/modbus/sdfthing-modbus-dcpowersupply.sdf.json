@@ -7,7 +7,8 @@
   }, 
   "namespace": {
     "fb": "https://onedm.org/exploratory/onefb/",
-    "pg": "https://onedm.org/playground/"
+    "pg": "https://onedm.org/playground/",
+    "modv": "https://example.org/tbd/modbus-rdf-vocabulary"
   }, 
   "defaultNamespace": "fb", 
 
@@ -48,6 +49,7 @@
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1000",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -75,6 +77,7 @@
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1000",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -147,6 +150,7 @@
               "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1002",
                 "modv:length": 1
               }
@@ -168,6 +172,7 @@
               "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1003",
                 "modv:length": 1
               }
@@ -188,6 +193,7 @@
               "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1004",
                 "modv:length": 1
               }
@@ -210,6 +216,7 @@
               "WotProtocolBinding": {
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1005",
                 "modv:length": 1
               }
@@ -239,6 +246,7 @@
                 "op": "writeproperty",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1004",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -257,6 +265,7 @@
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1006",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -270,6 +279,7 @@
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1006",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -292,6 +302,7 @@
                   "op": "writeproperty",
                   "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                   "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                  "modv:entity": "HoldingRegister",
                   "modv:offset": "1008",
                   "modv:length": 1,
                   "modv:function": "6"
@@ -300,6 +311,7 @@
                   "op": "readproperty",
                   "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                   "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                  "modv:entity": "HoldingRegister",
                   "modv:offset": "1008",
                   "modv:length": 1,
                   "modv:function": "3"
@@ -316,6 +328,7 @@
                 "op": "invokeaction",
                 "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
                 "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+                "modv:entity": "HoldingRegister",
                 "modv:offset": "1008",
                 "modv:length": 1,
                 "modv:function": "6"
@@ -337,9 +350,10 @@
               "#/sdfThing/DCPowerSupply_LW3010E/sdfObject/OperationalSetting/sdfProperty/currentMachineState"
             ],
             "WotProtocolBinding": {
-              "op": "ReadProperty",
+              "op": "readproperty",
               "href": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisIPAddress/" },
               "modv:unitID": { "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ThisUnitID" },
+              "modv:entity": "HoldingRegister",
               "modv:offset": "1000",
               "modv:length": 7,
               "modv:function": "3"
@@ -398,7 +412,7 @@
           "default": 1
         },
         "ThisUnitID": {
-          "sdfRef": "#/sdfThing/DCPowerSupply/sdfData/ModbusUnitID",
+          "sdfRef": "#/sdfThing/DCPowerSupply_LW3010E/sdfData/ModbusUnitID",
           "const": 1
         },
         "ThisIPAddress": {
