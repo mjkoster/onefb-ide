@@ -1,0 +1,46 @@
+{
+    "@context": [
+        "https://www.w3.org/2019/wot/td/v1",
+        {
+            "fb": "https://onedm.org/exploratory/onefb/",
+            "pg": "https://onedm.org/playground/",            
+            "modv": "https://www.example.com/ns/modbustcp/"
+        }
+    ],
+    "title": "EHD_RTU",
+    "description": "Modbus RTU for EHD Thruster experiment, measures HV voltage, HV current, and resulting thrust",
+    "id": "uri:dev:uuid:d940576f-d917-40a0-857a-07f9accf68a4",
+    "securityDefinitions": {
+        "nosec_sc": {
+            "scheme": "nosec"
+        }
+    },
+    "security": "nosec_sc",
+
+    "base": "",
+    "@type": "Thing",
+    "properties": {
+        "VoltageSetPoint/Set_Point_Value": {
+            "description": "Voltage Set Point Value",
+            "writeOnly": true,
+            "type": "number",
+            "units": "V",
+            "minimum": 0,
+            "maximum": 3000,
+            "multipleOf": 1,
+            "scaleMinimum": 0,
+            "scaleMaximum": 30,
+            "Forms": [
+                {
+                    "op": "writeproperty",
+                    "href": "modbus+tcp://71.202.145.92:502/",
+                    "modv:unitID": "1",
+                    "modv:entity": "HoldingRegister",
+                    "modv:offset": "1000",
+                    "modv:function": "6",
+                    "modv:length": 1
+                }
+            ]
+        }
+    }
+}
