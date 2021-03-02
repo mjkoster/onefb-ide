@@ -101,9 +101,9 @@
             "readOnly": true,
             "type": "array",
             "items": {
-                "UHVMeasurement/Sensor_Value": {},
-                "IHVMeasurement/Sensor_Value": {},
-                "ThrustMeasurement/Sensor_Value": {}
+                "UHVMeasurement/Sensor_Value": { "@id": "#/properties/UHVMeasurement/Sensor_Value" },
+                "IHVMeasurement/Sensor_Value": { "@id": "#/properties/IHVMeasurement/Sensor_Value" },
+                "ThrustMeasurement/Sensor_Value": { "@id": "#/properties/ThrustMeasurement/Sensor_Value" }
             },
             "Forms": [{
                 "op": "readproperty",
