@@ -48,7 +48,7 @@
             }]
         },
         "IHVMeasurement/Sensor_Value": {
-            "description": "Thruster HV Voltage Measurement Value",
+            "description": "Thruster HV Amperage Measurement Value",
             "@type": [
                 "fb:#/sdfThing/EHD_RTU/sdfObject/IHVMeasurement/sdfProperty/Sensor_Value",
                 "pg:#/sdfObject/Current"
@@ -72,7 +72,7 @@
             }]
         },
         "ThrustMeasurement/Sensor_Value": {
-            "description": "Thruster HV Voltage Measurement Value",
+            "description": "Thrust Measurement Value",
             "@type": [
                 "fb:#/sdfThing/EHD_RTU/sdfObject/ThrustMeasurement/sdfProperty/Sensor_Value",
                 "pg:#/sdfObject/Load"
