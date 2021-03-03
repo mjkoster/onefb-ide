@@ -2,8 +2,6 @@
     "@context": [
         "https://www.w3.org/2019/wot/td/v1",
         {
-            "fb": "https://onedm.org/exploratory/onefb/",
-            "pg": "https://onedm.org/playground/",            
             "modv": "https://www.example.com/ns/modbustcp/"
         }
     ],
@@ -34,7 +32,7 @@
                     "contentType": "application/sdf+json"
                 },
                 {
-                    "@id": "https://onedm.org/playground/#/sdfObject/Voltage",
+                    "@id": "https://onedm.org/playground/#/sdfObject/Voltage/sdfProperty/Sensor_Value",
                     "contentType": "application/sdf+json"
                 }
             ],
@@ -64,7 +62,7 @@
                     "contentType": "application/sdf+json"
                 },
                 {
-                    "@id": "https://onedm.org/playground/onefb/#/sdfObject/Current",
+                    "@id": "https://onedm.org/playground/onefb/#/sdfObject/Current/sdfProperty/Sensor_Value",
                     "contentType": "application/sdf+json"
                 }
             ],
@@ -94,7 +92,7 @@
                     "contentType": "application/sdf+json"
                 },
                 {
-                    "@id": "https://onedm.org/playground/onefb/#/sdfObject/Load",
+                    "@id": "https://onedm.org/playground/onefb/#/sdfObject/Load/sdfProperty/Sensor_Value",
                     "contentType": "application/sdf+json"
                 }
             ],
