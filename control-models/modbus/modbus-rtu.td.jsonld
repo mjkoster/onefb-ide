@@ -20,14 +20,23 @@
     "base": "",
     "@type": [
         "Thing",
-        "fb:#/sdfThing/EHD_RTU"
+        {
+            "@id": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU",
+            "contentType": "application/sdf+json"
+        }
     ],
     "properties": {
         "UHVMeasurement/Sensor_Value": {
             "description": "Thruster HV Voltage Measurement Value",
             "@type": [
-                "fb:#/sdfThing/EHD_RTU/sdfObject/VHVMeasurement/sdfProperty/Sensor_Value",
-                "pg:#/sdfObject/Voltage"
+                { 
+                    "@id" :"https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/VHVMeasurement/sdfProperty/Sensor_Value",
+                    "contentType": "application/sdf+json"
+                },
+                {
+                    "@id": "https://onedm.org/playground/#/sdfObject/Voltage",
+                    "contentType": "application/sdf+json"
+                }
             ],
             "readOnly": true,
             "type": "number",
@@ -50,10 +59,16 @@
         "IHVMeasurement/Sensor_Value": {
             "description": "Thruster HV Amperage Measurement Value",
             "@type": [
-                "fb:#/sdfThing/EHD_RTU/sdfObject/IHVMeasurement/sdfProperty/Sensor_Value",
-                "pg:#/sdfObject/Current"
+                { 
+                    "@id" :"https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/IHVMeasurement/sdfProperty/Sensor_Value",
+                    "contentType": "application/sdf+json"
+                },
+                {
+                    "@id": "https://onedm.org/playground/onefb/#/sdfObject/Current",
+                    "contentType": "application/sdf+json"
+                }
             ],
-            "readOnly": true,
+           "readOnly": true,
             "type": "number",
             "units": "A",
             "minimum": 0,
@@ -74,10 +89,16 @@
         "ThrustMeasurement/Sensor_Value": {
             "description": "Thrust Measurement Value",
             "@type": [
-                "fb:#/sdfThing/EHD_RTU/sdfObject/ThrustMeasurement/sdfProperty/Sensor_Value",
-                "pg:#/sdfObject/Load"
+                { 
+                    "@id" :"https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/ThrustMeasurement/sdfProperty/Sensor_Value",
+                    "contentType": "application/sdf+json"
+                },
+                {
+                    "@id": "https://onedm.org/playground/onefb/#/sdfObject/Load",
+                    "contentType": "application/sdf+json"
+                }
             ],
-            "readOnly": true,
+           "readOnly": true,
             "type": "number",
             "units": "N",
             "minimum": 0,
@@ -97,7 +118,10 @@
         },
         "HoldingRegisters/RegisterBlock": {
             "description": "Read all registers",
-            "@type": "fb:#/sdfThing/EHD_RTU/sdfObject/HoldingRegisters/sdfProperty/RegisterBlock",
+            "@type": { 
+                "@id" :"fb:#/sdfThing/EHD_RTU/sdfObject/HoldingRegisters/sdfProperty/RegisterBlock",
+                "contentType": "application/sdf+json"
+            },
             "readOnly": true,
             "type": "array",
             "items": {
