@@ -15,11 +15,28 @@
     },
     "security": "nosec_sc",
 
-    "base": "",
+    "base": "modbus+tcp://71.202.145.92:502/",
     "@type": [
         "Thing",
         {
             "@id": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU",
+            "contentType": "application/sdf+json"
+        }
+    ],
+    "links": [
+        {
+            "rel": "isInstanceOf",
+            "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/VHVMeasurement",
+            "contentType": "application/sdf+json"
+        },
+        {
+            "rel": "isInstanceOf",
+            "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/IHVMeasurement",
+            "contentType": "application/sdf+json"
+        },
+        {
+            "rel": "isInstanceOf",
+            "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/ThrustMeasurement",
             "contentType": "application/sdf+json"
         }
     ],
