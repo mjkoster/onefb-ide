@@ -25,17 +25,17 @@
     ],
     "links": [
         {
-            "rel": "isInstanceOf",
-            "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/VHVMeasurement",
+            "rel": "implements",
+            "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/UHVMeasurement",
             "contentType": "application/sdf+json"
         },
         {
-            "rel": "isInstanceOf",
+            "rel": "implements",
             "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/IHVMeasurement",
             "contentType": "application/sdf+json"
         },
         {
-            "rel": "isInstanceOf",
+            "rel": "implements",
             "href": "https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/ThrustMeasurement",
             "contentType": "application/sdf+json"
         }
@@ -45,7 +45,7 @@
             "description": "Thruster HV Voltage Measurement Value",
             "@type": [
                 { 
-                    "@id" :"https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/VHVMeasurement/sdfProperty/Sensor_Value",
+                    "@id" :"https://onedm.org/exploratory/onefb/#/sdfThing/EHD_RTU/sdfObject/UHVMeasurement/sdfProperty/Sensor_Value",
                     "contentType": "application/sdf+json"
                 },
                 {
