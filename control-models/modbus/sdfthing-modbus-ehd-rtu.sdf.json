@@ -125,7 +125,7 @@
       "sdfData": {
         "UHVData": {
           "type": "number",
-          "units": "V",
+          "unit": "V",
           "minimum": 0,
           "maximum": 1200,
           "multipleOf": 1,
@@ -134,7 +134,7 @@
         },
         "IHVData": {
           "type": "number",
-          "units": "A",
+          "unit": "A",
           "minimum": 0,
           "maximum": 2000,
           "multipleOf": 1,
@@ -143,7 +143,7 @@
         },
         "ThrustData": {
           "type": "number",
-          "units": "N",
+          "unit": "N",
           "minimum": 0,
           "maximum": 2000,
           "multipleOf": 1,

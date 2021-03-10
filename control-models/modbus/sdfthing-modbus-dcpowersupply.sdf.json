@@ -366,7 +366,7 @@
       "sdfData": {
         "VoltageData": {
           "type": "number",
-          "units": "V",
+          "unit": "V",
           "minimum": 0,
           "maximum": 3000,
           "multipleOf": 1,
@@ -375,7 +375,7 @@
         },
         "AmperageData": {
           "type": "number",
-          "units": "A",
+          "unit": "A",
           "minimum": 0,
           "maximum": 1000,
           "multipleOf": 1,
