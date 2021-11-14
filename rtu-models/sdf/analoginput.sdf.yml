@@ -28,7 +28,7 @@ sdfObject:
         default: 100
       UnitResolution:
         type: number
-        default: .1
+        default: 0.1
       OutputLink:
         sdfRef: /#/sdfData/ObjectLink
       InputValue:
