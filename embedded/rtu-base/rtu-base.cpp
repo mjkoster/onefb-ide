@@ -38,8 +38,8 @@ class Object: public Item {
     void syncTime() {};
     void syncOutput() {};
     void syncInput() {};
-    Resource* resource_list[10];
     vector<Resource*> resources;
+    Resource* resource_list[0];
 };
 
 /* base application type definitions */
@@ -63,7 +63,8 @@ class embeddedNode: public Object {
   public:
     uint16_t typeID = 9200;
     string description = "The node object contains a list of object instances and other node-global information";
-    Object* object_list[];
+    vector<Object*> objects;
+    Object* object_list[0];
 };
 
 class schedulertimer: public Object {
@@ -72,5 +73,6 @@ class schedulertimer: public Object {
     string description = "Timer object";
     void updateTimer(uint32_t msec) {};
     uint32_t timer_interval;
-    outputLink* output_link[];
+    vector<outputLink*> output_links;
+    outputLink* output_link[0];
 };
