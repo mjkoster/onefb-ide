@@ -35,8 +35,10 @@ class Resource: public Item {
 class Object: public Item {
   public:
     void syncTime() {};
-    void syncOutput() {};
     void syncInput() {};
+    void syncOutput() {};
+    void onTime() {};
+    void onInput() {};
     Resource* resource_list[];
 };
 
