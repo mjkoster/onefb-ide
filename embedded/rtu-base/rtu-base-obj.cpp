@@ -1,6 +1,7 @@
 /* rtu-base contains the base types and fundamental application types */
 
 #include <stdint.h> 
+#include <stdio.h> 
 
 /* global common types */
 
@@ -81,7 +82,7 @@ class Object {
       return readValue(); // Default read value, override for e.g. gpio read
     }; 
     // Resources that are part of this object
-    Resource resource[];
+    Resource* resource[];
 
     // Construct with type and instance
     Object(uint16_t type, uint16_t instance) {
@@ -92,10 +93,11 @@ class Object {
 
 int main() {
   Object object(9999,1);
-  object.resource = {
-    new Resource(1111, 1, booleanType),
-    new Resource(2222, 1, integerType)
-  }
+  object.resource[0] = new Resource(1111, 1, booleanType);
+  object.resource[1] = new Resource(2222, 1, integerType);
 
+  object.resource[1] -> value.integerType = 0;
+  printf("type = %d\n", object.resource[0] -> valueType);
+  return(0);
 };
 
