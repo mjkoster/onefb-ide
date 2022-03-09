@@ -76,17 +76,27 @@ class Object {
     void onInterval() {}; 
     // Handler for Value update from either input or output sync
     void onUpdate(AnyValueType value) {}; 
-    // Handler to return input link
+    // Handler to return value in response to input sync from another object
     AnyValueType onSyncInput() {
-      return readValue(); // Default read value 
+      return readValue(); // Default read value, override for e.g. gpio read
     }; 
     // Resources that are part of this object
-    Resource resource[];
+    //Resource resource[];
+    int resource[];
 
     // Construct with type and instance
     Object(uint16_t type, uint16_t instance) {
       typeID = type;
       instanceID = instance;
     };
+};
+
+int main() {
+  Object object(9999,1);
+  object.resource = { 0,1
+    //new Resource(1111, 1, booleanType),
+    //new Resource(2222, 1, integerType)
+  }
+
 };
 
