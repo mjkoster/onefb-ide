@@ -43,12 +43,21 @@ class Object {
   public:
     uint16_t typeID;
     uint16_t instanceID;
-    
-    // External Interface, standard implementation
+
+    /* sync object state by copying resource values
+    Source: 1. OutputValue, 2. CurrentValue, 3. InputValue
+    Destination: 1. InputValue, 2. CurrentValue, 3. OutputValue
+    */
+    // Copy Value from input link => this Object 
+    void syncInputLink() {}; 
+    // Copy Value from this Object => all output links 
+    void syncOutputLink() {}; 
+
+    // Value Interface
     // Update Timer on Object
     void updateTimer(uint32_t msec) {}; 
-    // Update (Input, Current, Output) Value 
-    void updateValue(AnyValueType value) {};
+    // Update Value 
+    void updateValue(AnyValueType value) {}; // 1. InputValue, 2. CurrentValue, 3. OutputValue
     void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {};
     // Read Value
     AnyValueType readValue() {
@@ -62,11 +71,6 @@ class Object {
       return returnValue;
     }; 
 
-    // Copy (Output, Current, Input) => (Input, Current, Output) Value from input link
-    void syncInputLink() {}; 
-    // Copy (Output, Current, Input) => (Input, Current, Output) Value to all output links 
-    void syncOutputLink() {}; 
-
     // Internal Interface, implements application logic
     // Handler for Timer interval
     void onInterval() {}; 
@@ -74,9 +78,7 @@ class Object {
     void onUpdate(AnyValueType value) {}; 
     // Handler to return input link
     AnyValueType onSyncInput() {
-      AnyValueType returnValue;
-      returnValue.integerType = 0; // 1. OutputValue, 2. CurrentValue, 3. InputValue
-      return returnValue;
+      return readValue(); // Default read value 
     }; 
 
     // Construct with type and instance
