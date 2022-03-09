@@ -26,8 +26,8 @@ class Resource {
   public:
     uint16_t typeID;
     uint16_t instanceID;    
-    AnyValueType value;
     ValueType valueType;
+    AnyValueType value;
 
     // Construct with type and instance + value type
     Resource(uint16_t type, uint16_t instance, ValueType vtype) {
@@ -80,14 +80,13 @@ class Object {
     AnyValueType onSyncInput() {
       return readValue(); // Default read value 
     }; 
+    // Resources that are part of this object
+    Resource resource[];
 
     // Construct with type and instance
     Object(uint16_t type, uint16_t instance) {
       typeID = type;
       instanceID = instance;
     };
-
-    // Resources that are part of this object
-    Resource resource[];
 };
 
