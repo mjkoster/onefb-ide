@@ -92,12 +92,19 @@ class Object {
 };
 
 int main() {
-  Object object(9999,1);
+  Object object(9999,1); // need a place to put a list of objects
   object.resource[0] = new Resource(1111, 1, booleanType);
   object.resource[1] = new Resource(2222, 1, integerType);
+  Object* object2 = new Object(9999,2);
+  object2 -> resource[0] = new Resource(1111, 1, booleanType); 
+  object2 -> resource[1] = new Resource(2222, 1, integerType);
 
-  object.resource[1] -> value.integerType = 0;
+  object.resource[1] -> value.integerType = 100;
   printf("type = %d\n", object.resource[0] -> valueType);
+  printf("type2 = %d\n", object.resource[1] -> valueType);
+  printf("value = %d\n", object.resource[1] -> value.integerType);
+  printf("type = %d\n", object2 -> resource[0] -> valueType);
+  printf("type2 = %d\n", object2 -> resource[1] -> valueType);
   return(0);
 };
 
