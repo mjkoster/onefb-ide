@@ -208,7 +208,19 @@ class ObjectList {
         printf ( "[%d, %d]\n", object -> typeID, object -> instanceID);
         Resource* resource = object -> nextResource;
         while ( resource != NULL) {
-          printf ( "  [%d, %d]\n", resource -> typeID, object -> instanceID);
+          printf ( "  [%d, %d] ", resource -> typeID, object -> instanceID);
+          printf ( "value type %d, ", resource -> valueType);
+          printf ( "value = ");
+          switch(resource -> valueType) {
+            case integerType: {
+              printf ( "%d", resource -> value.integerType);
+            }
+            case floatType: {
+              printf ( "%f", resource -> value.floatType);
+            }
+            default:
+              printf ("\n");
+          }
           resource = resource -> nextResource;
         };
         object = object -> nextObject;
