@@ -193,14 +193,6 @@ class ObjectList {
       };     
     };
 
-    void displayObjects() {
-      Object* object = nextObject;
-      while ( object != NULL) {
-        printf ( "[%d, %d]\n", object -> typeID, object -> instanceID);
-        object = object -> nextObject;
-      };
-    };
-    
     // return a pointer to the first object that matches the type and instance
     Object* getObjectByID(uint16_t type, uint16_t instance) {
       Object* object = nextObject;
@@ -210,6 +202,18 @@ class ObjectList {
       return object; // returns NULL if doesn't exist
     };
 
+    void displayObjects() {
+      Object* object = nextObject;
+      while ( object != NULL) {
+        printf ( "[%d, %d]\n", object -> typeID, object -> instanceID);
+        Resource* resource = object -> nextResource;
+        while ( resource != NULL) {
+          printf ( "  [%d, %d]\n", resource -> typeID, object -> instanceID);
+          resource = resource -> nextResource;
+        };
+        object = object -> nextObject;
+      };
+    };
 
     // construct with an empty object list
     ObjectList() {
