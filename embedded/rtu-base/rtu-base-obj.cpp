@@ -68,13 +68,26 @@ class Object {
     // Copy Value from input link => this Object 
     void syncFromInputLink() {
       // readDefaultValue from InputLink
-      // writeDefaultValue to this object
+      // updateDefaultValue on this object
+      Resource* inputLink = getResourceByID(InputLinkType,0);
+      if (inputLink != NULL) {
+        //Object* sourceObject = getObjectByID(
+        //inputLink -> value.linkType.typeID,
+        //inputLink -> value.linkType.instanceID)
+        //updateDefaultValue(sourceObject -> readDefaultValue);
+      }
     }; 
 
     // Copy Value from this Object => all output links 
     void syncToOutputLink() {
       // readDefaultValue from this object
       // updateDefaultValue to OutputLink(s)
+      Resource* resource = getResourceByID(OutputLinkType,0);
+      //getResourceByType(OutputLinkType) would be a generator that returns a sequence of instances
+      if (resource != NULL) {
+        //Object* object = 
+        //resource -> value.linkType.typeID;
+      }    
     }; 
 
     // Value Interface
@@ -108,6 +121,7 @@ class Object {
       printf("updateDefault couldn't find a candidate resource\n");
       return;
     }; 
+
     void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {
       Resource* resource = getResourceByID(type, instance);
       if (resource != NULL) {
@@ -138,6 +152,7 @@ class Object {
       printf("readDefault couldn't find a candidate resource\n");
       return(returnValue);
     }; 
+
     AnyValueType readValueByID(uint16_t type, uint16_t instance) {
       Resource* resource = getResourceByID(type, instance);
       if (resource != NULL) {
