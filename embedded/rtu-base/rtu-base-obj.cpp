@@ -33,7 +33,7 @@ union AnyValueType {
 
 /* base classes */
 
-/* Resources expose values and chain together into a linked list */
+/* Resource: expose values and chain together into a linked list for each object*/
 class Resource {
   public:
     uint16_t typeID;
@@ -58,12 +58,17 @@ class Object {
   public:
     uint16_t typeID; // could be private 
     uint16_t instanceID;
-    Object* nextObject;
-
-    /* sync object state by copying Default resource values
-    Source: 1. OutputValue, 2. CurrentValue, 3. InputValue
-    Destination: 1. InputValue, 2. CurrentValue, 3. OutputValue
-    */
+    Object* nextObject; // next Object in the chain
+    Object* firstObject; // first Object in the ObjectList
+   
+    // return a pointer to the first object that matches the type and instance
+    Object* getObjectByID(uint16_t type, uint16_t instance) {
+      Object* object = firstObject;
+      while (object != NULL && object -> typeID != type && object -> instanceID != instance) {
+        object = object -> nextObject;
+      };
+      return object; // returns NULL if doesn't exist
+    };
 
     // Copy Value from input link => this Object 
     void syncFromInputLink() {
@@ -71,10 +76,8 @@ class Object {
       // updateDefaultValue on this object
       Resource* inputLink = getResourceByID(InputLinkType,0);
       if (inputLink != NULL) {
-        //Object* sourceObject = getObjectByID(
-        //inputLink -> value.linkType.typeID,
-        //inputLink -> value.linkType.instanceID)
-        //updateDefaultValue(sourceObject -> readDefaultValue);
+        Object* sourceObject = getObjectByID(inputLink -> value.linkType.typeID, inputLink -> value.linkType.instanceID);
+        updateDefaultValue(sourceObject -> onInputSync());
       }
     }; 
 
@@ -82,8 +85,16 @@ class Object {
     void syncToOutputLink() {
       // readDefaultValue from this object
       // updateDefaultValue to OutputLink(s)
-      Resource* resource = getResourceByID(OutputLinkType,0);
-      //getResourceByType(OutputLinkType) would be a generator that returns a sequence of instances
+     AnyValueType value = readDefaultValue();
+      Resource* resource = nextResource;
+        while ( (resource != NULL) ) {
+          if (OutputLinkType == resource -> typeID) { // process all output links
+            Object* object = getObjectByID(resource -> value.linkType.typeID, resource -> value.linkType.instanceID);
+            object -> updateDefaultValue(value);
+          };
+        resource = resource -> nextResource;
+      };
+ 
       if (resource != NULL) {
         //Object* object = 
         //resource -> value.linkType.typeID;
@@ -100,22 +111,23 @@ class Object {
     
     // Update Value 
     void updateDefaultValue(AnyValueType value) {
-      // 1. InputValue, 2. CurrentValue, 3. OutputValue
-      // if (upadteValueByID (InputValueType,0,value) != NULL) {return}
-      // etc.
+      // priority of resource type to update value and call onUpdate
       Resource* resource = getResourceByID(InputValueType,0);
       if (resource != NULL) {
         resource -> value = value;
+        onValueUpdate(resource -> typeID, resource -> instanceID, value);
         return;
       };
       resource = getResourceByID(CurrentValueType,0);
       if (resource != NULL) {
         resource -> value = value;
+        onValueUpdate(resource -> typeID, resource -> instanceID, value);
         return;
       };
       resource = getResourceByID(OutputValueType,0);
       if (resource != NULL){
         resource -> value = value;
+        onValueUpdate(resource -> typeID, resource -> instanceID, value);
         return;
       };
       printf("updateDefault couldn't find a candidate resource\n");
@@ -170,7 +182,7 @@ class Object {
     void onInterval() {}; 
 
     // Handler for Value update from either input or output sync
-    void onValueUpdate(AnyValueType value) {}; 
+    void onValueUpdate(uint16_t type, uint16_t instance, AnyValueType value) {}; 
 
     // Handler to return value in response to input sync from another object
     AnyValueType onInputSync() {
@@ -182,16 +194,16 @@ class Object {
 
     Resource* newResource(uint16_t type, uint16_t instance, ValueType vtype) {
       // find last resource in the chain
-      if (nextResource == NULL) {
+      if (nextResource == NULL) { // make first resource instance and add to the list
         nextResource = new Resource(type, instance, vtype );
         return nextResource;
       }
-      else {
+      else { // already have first resource
         Resource* resource = nextResource;
           while (resource -> nextResource != NULL) {
             resource = resource -> nextResource;
           };
-        // make instance and add the new resource
+        // make instance and add the new resource to the list
         resource -> nextResource = new Resource(type, instance, vtype );
         return resource -> nextResource;
       };
@@ -206,11 +218,12 @@ class Object {
     };
 
     // Construct with type and instance and empty list
-    Object(uint16_t type, uint16_t instance) {
+    Object(uint16_t type, uint16_t instance, Object* listNextObject) {
       typeID = type;
       instanceID = instance;
       nextResource = NULL;
       nextObject = NULL;
+      firstObject = listNextObject;
     };
 };
 
@@ -222,17 +235,17 @@ class ObjectList {
     Object* newObject(uint16_t type, uint16_t instance) {
       // find the last object in the chain, has a null nextobject pointer
       // FIXME check if it already exists?
-      if (nextObject == NULL) {
-        nextObject = new Object(type, instance);
+      if (nextObject == NULL) { // make first object and add to the list
+        nextObject = new Object(type, instance, nextObject);
         return nextObject;
       }
-      else {
+      else { // already have the first object, find the end of the list 
         Object* object = nextObject;
         while (object -> nextObject != NULL) {
           object = object -> nextObject;
         };
         // make instance and add the new resource
-        object -> nextObject = new Object(type, instance );
+        object -> nextObject = new Object(type, instance, nextObject);
         return object -> nextObject; 
       };     
     };
