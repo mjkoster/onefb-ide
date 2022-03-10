@@ -208,7 +208,7 @@ class ObjectList {
         printf ( "[%d, %d]\n", object -> typeID, object -> instanceID);
         Resource* resource = object -> nextResource;
         while ( resource != NULL) {
-          printf ( "  [%d, %d] ", resource -> typeID, object -> instanceID);
+          printf ( "  [%d, %d] ", resource -> typeID, resource -> instanceID);
           printf ( "value type %d, ", resource -> valueType);
           printf ( "value = ");
           switch(resource -> valueType) {
@@ -244,11 +244,19 @@ int main() {
   AnyValueType value;
   Object* object = rtu.newObject(9999,1);
   object -> newResource(1111, 1, integerType);
-  object -> newResource(2222, 1, floatType);
+  object -> newResource(2222, 2, floatType);
   value.integerType = 100;
   object -> updateValueByID(1111, 1, value);
   value.floatType = 101.1;
-  object -> updateValueByID(2222, 1, value);
+  object -> updateValueByID(2222, 2, value);
+  object = rtu.newObject(9090,2);
+  object -> newResource(1010, 1, integerType);
+  object -> newResource(1010, 2, floatType);
+  value.integerType = 1001;
+  object -> updateValueByID(1010, 1, value);
+  value.floatType = 1001.01;
+  object -> updateValueByID(1010, 2, value);
+
   rtu.displayObjects();
   return(0);
 };
