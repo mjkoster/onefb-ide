@@ -33,14 +33,15 @@ union AnyValueType {
 
 /* base classes */
 
-/* Resources expose values */
+/* Resources expose values and chain together into a linked list */
 class Resource {
   public:
     uint16_t typeID;
     uint16_t instanceID;    
+    Resource* nextResource;
+
     ValueType valueType;
     AnyValueType value;
-    Resource* nextResource;
 
     // Construct with type and instance + value type
     Resource(uint16_t type, uint16_t instance, ValueType vtype) {
@@ -51,12 +52,13 @@ class Resource {
     };
 };
 
-/* Objects contain a collection of resources and some bound methods */
+/* Objects contain a collection of resources and some bound methods and chain into a linked list */
 /* Bound methods are extended for application function types */
 class Object {
   public:
     uint16_t typeID; // could be private 
     uint16_t instanceID;
+    Object* nextObject;
 
     /* sync object state by copying Default resource values
     Source: 1. OutputValue, 2. CurrentValue, 3. InputValue
@@ -85,10 +87,19 @@ class Object {
     
     // Update Value 
     void updateDefaultValue(AnyValueType value) {
+      // 1. InputValue, 2. CurrentValue, 3. OutputValue
       // if (upadteValueByID (InputValueType,0,value) != NULL) {return}
       // etc.
-    }; // 1. InputValue, 2. CurrentValue, 3. OutputValue
-    void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {};
+    }; 
+    void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {
+      Resource* resource = getResourceByID(type, instance);
+      if (resource != NULL) {
+        resource -> value = value;
+      }
+      else {
+        printf("NULL in updateValueByID\n");
+      };
+    };
 
     // Read Value
     AnyValueType readDefaultValue() {
@@ -99,9 +110,14 @@ class Object {
       return returnValue;
     }; 
     AnyValueType readValueByID(uint16_t type, uint16_t instance) {
-      AnyValueType returnValue;
-      returnValue.integerType = 0;
-      return returnValue;
+      Resource* resource = getResourceByID(type, instance);
+      if (resource != NULL) {
+        return resource -> value;
+      }
+      else {
+        printf ("NULL in readValueByID\n");
+        return resource -> value;
+      }
     }; 
 
     // Internal Interface, implements application logic
@@ -119,7 +135,6 @@ class Object {
 
     // Linked list of Resources that are part of this object, make private?
     Resource* nextResource;
-    Object* nextObject;
 
     Resource* newResource(uint16_t type, uint16_t instance, ValueType vtype) {
       // find last resource in the chain
@@ -177,6 +192,14 @@ class ObjectList {
         return object -> nextObject; 
       };     
     };
+
+    void displayObjects() {
+      Object* object = nextObject;
+      while ( object != NULL) {
+        printf ( "[%d, %d]\n", object -> typeID, object -> instanceID);
+        object = object -> nextObject;
+      };
+    };
     
     // return a pointer to the first object that matches the type and instance
     Object* getObjectByID(uint16_t type, uint16_t instance) {
@@ -187,6 +210,7 @@ class ObjectList {
       return object; // returns NULL if doesn't exist
     };
 
+
     // construct with an empty object list
     ObjectList() {
       nextObject = NULL;
@@ -195,25 +219,22 @@ class ObjectList {
 
 int main() {
   ObjectList rtu;
-  Object* object1 = rtu.newObject(9999,1);
-  Resource* resource1 = object1 -> newResource(1111, 1, integerType);
-  Resource* resource2 = object1 -> newResource(2222, 1, floatType);
-  resource1 -> value.integerType = 100;
-  resource2 -> value.floatType = 101.1;
+  AnyValueType value;
+  Object* object = rtu.newObject(9999,1);
+  object -> newResource(1111, 1, integerType);
+  object -> newResource(2222, 1, floatType);
+  value.integerType = 100;
+  object -> updateValueByID(1111, 1, value);
+  value.floatType = 101.1;
+  object -> updateValueByID(2222, 1, value);
+  //resource1 -> value.integerType = 100;
+  //resource2 -> value.floatType = 101.1;
+  rtu.displayObjects();
 
-  /*
-  rtu.nextObject = new Object(9999,1);
-  rtu.nextObject -> nextResource = new Resource(1111, 1, integerType);
-  rtu.nextObject -> nextResource -> nextResource = new Resource(2222, 1, floatType);
-  rtu.nextObject -> nextObject = new Object(9999,2);
-  rtu.nextObject -> nextObject -> nextResource = new Resource(1111, 1, integerType);
-  rtu.nextObject -> nextObject -> nextResource -> nextResource = new Resource(2222, 1, floatType);
-
-  rtu.nextObject -> nextResource  -> value.integerType = 100;
-  rtu.nextObject -> nextResource -> nextResource -> value.floatType = 101.1;
-  rtu.nextObject -> nextObject -> nextResource  -> value.integerType = 200;
-  rtu.nextObject -> nextObject -> nextResource -> nextResource -> value.floatType = 201.1;
- */
+  value = object -> readValueByID(1111,1);
+  printf("intvalue = %d\n", value.integerType);
+  value = object -> readValueByID(2222,1);
+  printf("floatvalue = %f\n", value.floatType);
 
   printf("r0type = %d\n", rtu.nextObject -> nextResource -> typeID);
   printf("r1type = %d\n", rtu.nextObject -> nextResource -> nextResource -> typeID);
