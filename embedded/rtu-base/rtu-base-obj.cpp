@@ -155,8 +155,8 @@ class Object {
 
     Resource* getResourceByID(uint16_t type, uint16_t instance) {
       Resource* resource = nextResource;
-      while (resource != NULL && resource -> typeID != type && resource -> instanceID != instance) {
-        resource = nextResource;
+      while ( (resource != NULL) && (resource -> typeID != type || resource -> instanceID != instance) ) {
+        resource = resource -> nextResource;
       };
       return resource; // returns NULL if resource doesn't exist
     };
@@ -212,11 +212,17 @@ class ObjectList {
           printf ( "value type %d, ", resource -> valueType);
           printf ( "value = ");
           switch(resource -> valueType) {
+            case booleanType: {
+              printf ( "%s\n", resource -> value.booleanType ? "true": "false");
+              break;
+            }
             case integerType: {
-              printf ( "%d", resource -> value.integerType);
+              printf ( "%d\n", resource -> value.integerType);
+              break;
             }
             case floatType: {
-              printf ( "%f", resource -> value.floatType);
+              printf ( "%f\n", resource -> value.floatType);
+              break;
             }
             default:
               printf ("\n");
@@ -243,20 +249,7 @@ int main() {
   object -> updateValueByID(1111, 1, value);
   value.floatType = 101.1;
   object -> updateValueByID(2222, 1, value);
-  //resource1 -> value.integerType = 100;
-  //resource2 -> value.floatType = 101.1;
   rtu.displayObjects();
-
-  value = object -> readValueByID(1111,1);
-  printf("intvalue = %d\n", value.integerType);
-  value = object -> readValueByID(2222,1);
-  printf("floatvalue = %f\n", value.floatType);
-
-  printf("r0type = %d\n", rtu.nextObject -> nextResource -> typeID);
-  printf("r1type = %d\n", rtu.nextObject -> nextResource -> nextResource -> typeID);
-  printf("r0value = %d\n", rtu.nextObject -> nextResource -> value.integerType);
-  printf("r1value = %f\n", rtu.nextObject -> nextResource -> nextResource -> value.floatType);
-
   return(0);
 };
 
