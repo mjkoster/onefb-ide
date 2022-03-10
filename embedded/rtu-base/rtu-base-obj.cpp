@@ -64,7 +64,7 @@ class Object {
     // return a pointer to the first object that matches the type and instance
     Object* getObjectByID(uint16_t type, uint16_t instance) {
       Object* object = firstObject;
-      while (object != NULL && object -> typeID != type && object -> instanceID != instance) {
+      while (object != NULL && (object -> typeID != type || object -> instanceID != instance)) {
         object = object -> nextObject;
       };
       return object; // returns NULL if doesn't exist
@@ -253,7 +253,7 @@ class ObjectList {
     // return a pointer to the first object that matches the type and instance
     Object* getObjectByID(uint16_t type, uint16_t instance) {
       Object* object = nextObject;
-      while (object != NULL && object -> typeID != type && object -> instanceID != instance) {
+      while (object != NULL && (object -> typeID != type || object -> instanceID != instance)) {
         object = object -> nextObject;
       };
       return object; // returns NULL if doesn't exist
