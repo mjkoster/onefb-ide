@@ -126,14 +126,16 @@ class Object {
       if (nextResource == NULL) {
         nextResource = new Resource(type, instance, vtype );
         return nextResource;
+      }
+      else {
+        Resource* resource = nextResource;
+          while (resource -> nextResource != NULL) {
+            resource = resource -> nextResource;
+          };
+        // make instance and add the new resource
+        resource -> nextResource = new Resource(type, instance, vtype );
+        return resource -> nextResource;
       };
-      Resource* resource = nextResource;
-        while (resource -> nextResource != NULL) {
-          resource = resource -> nextResource;
-        };
-      // make instance and add the new resource
-      resource -> nextResource = new Resource(type, instance, vtype );
-      return resource -> nextResource;
     };
 
     Resource* getResourceByID(uint16_t type, uint16_t instance) {
@@ -164,14 +166,16 @@ class ObjectList {
       if (nextObject == NULL) {
         nextObject = new Object(type, instance);
         return nextObject;
-      };
-      Object* object = nextObject;
-      while (object -> nextObject != NULL) {
-        object = object -> nextObject;
-      };
-      // make instance and add the new resource
-      object -> nextObject = new Object(type, instance );
-      return object -> nextObject;      
+      }
+      else {
+        Object* object = nextObject;
+        while (object -> nextObject != NULL) {
+          object = object -> nextObject;
+        };
+        // make instance and add the new resource
+        object -> nextObject = new Object(type, instance );
+        return object -> nextObject; 
+      };     
     };
     
     // return a pointer to the first object that matches the type and instance
