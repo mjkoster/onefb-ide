@@ -4,6 +4,7 @@
 #include <stdio.h> 
 
 #define time_t uint32_t
+
 /* common types */
 
 struct InstanceLink {
@@ -116,19 +117,6 @@ class Object {
 
     // Value Interfaces
     
-    // Interface to Update Value 
-
-    void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {
-      Resource* resource = getResourceByID(type, instance);
-      if (resource != NULL) {
-        resource -> value = value;
-      onValueUpdate(type, instance, value); // call the update handler
-      }
-      else {
-        printf("NULL in updateValueByID\n");
-      };
-    };
-
     // Interface to Read Value
 
     AnyValueType readValueByID(uint16_t type, uint16_t instance) {
@@ -142,6 +130,20 @@ class Object {
       return(returnValue); // returns uninitialized value union if there is no candidate
       }
     }; 
+    
+    // Interface to Update Value 
+
+    void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {
+      Resource* resource = getResourceByID(type, instance);
+      if (resource != NULL) {
+        resource -> value = value;
+      onValueUpdate(type, instance, value); // call the update handler
+      }
+      else {
+        printf("NULL in updateValueByID\n");
+      };
+    };
+
     // Application logic extends this method
     void onValueUpdate(uint16_t type, uint16_t instance, AnyValueType value) {}; 
 
@@ -209,6 +211,25 @@ class Object {
     }; 
 
     // extended interface for default value sync
+    AnyValueType readDefaultValue() {
+      AnyValueType returnValue;
+      Resource* resource = getResourceByID(OutputValueType,0);
+      if (resource != NULL) {
+        return(resource -> value);
+      };
+      resource = getResourceByID(CurrentValueType,0);
+      if (resource != NULL) {
+        return(resource -> value);
+      };
+      resource = getResourceByID(InputValueType,0);
+      if (resource != NULL){
+        return(resource -> value);
+      };
+      printf("readDefault couldn't find a candidate resource\n"); // should throw an error
+      return(returnValue); // returns uninitialized value union if there is no candidate
+    }; 
+
+    // extended interface for default value sync
     void updateDefaultValue(AnyValueType value) {
       // prioritized resource types, update value and call onUpdate
       Resource* resource = getResourceByID(InputValueType,0);
@@ -232,25 +253,6 @@ class Object {
       };
       printf("updateDefaultValue couldn't find a candidate resource\n"); // should throw an error
       return;
-    }; 
-
-    // extended interface for default value sync
-    AnyValueType readDefaultValue() {
-      AnyValueType returnValue;
-      Resource* resource = getResourceByID(OutputValueType,0);
-      if (resource != NULL) {
-        return(resource -> value);
-      };
-      resource = getResourceByID(CurrentValueType,0);
-      if (resource != NULL) {
-        return(resource -> value);
-      };
-      resource = getResourceByID(InputValueType,0);
-      if (resource != NULL){
-        return(resource -> value);
-      };
-      printf("readDefault couldn't find a candidate resource\n"); // should throw an error
-      return(returnValue); // returns uninitialized value union if there is no candidate
     }; 
 
     /* 
