@@ -1,4 +1,4 @@
-/* rtu-base contains the base types */
+/* object-flow contains the base types and flow extensions */
 
 #include <stdint.h> 
 #include <stdio.h> 
@@ -23,18 +23,21 @@ union AnyValueType {
   time_t timeType;
 };
 
-/* Well-known Resource Types, should be in a header made from the SDF translator */
+/* Well-known reusable Resource Types, should be in a header made from the SDF translator */
+  // Free resource range 26231-32768
+  // Free object range 42769-65535 (?)
+
   // link types for pull and push data transfer
-  const uint16_t InputLinkType = 13000;
-  const uint16_t OutputLinkType = 13001;
+  const uint16_t InputLinkType = 27000;
+  const uint16_t OutputLinkType = 27001;
   // Value types for data connection endpoints
-  const uint16_t InputValueType = 13002;
-  const uint16_t CurrentValueType = 13004;
-  const uint16_t OutputValueType = 13003;
+  const uint16_t InputValueType = 27002;
+  const uint16_t CurrentValueType = 27003;
+  const uint16_t OutputValueType = 27004;
   // Timer data types for wrap-around-safe interval activation 
-  const uint16_t CurrentTimeType = 13005;
-  const uint16_t IntervalTimeType = 13006;
-  const uint16_t LastActivationTimeType = 13007;
+  const uint16_t CurrentTimeType = 27005;
+  const uint16_t IntervalTimeType = 27006;
+  const uint16_t LastActivationTimeType = 27007;
 
 /* base classes */
 
@@ -261,13 +264,13 @@ class Object {
     // Update CurrentTime value on Object and maybe call onInterval
     void updateCurrentTime(time_t timeValue) {
       // update current time
-      // interval time check is wrap-safe if time variable and HW timer both have uint32_t wrap behavior
-      // if(current time >= last activation time + interval time){ update last activation time and call onInterval }
+      // interval time check is wrap-safe if time variable and HW timer both have time_t wrap behavior
+      // if(current time - last activation time >= interval time){ update last activation time and call onInterval }
       Resource* currentTime = getResourceByID(CurrentTimeType, 0);
       Resource* intervalTime = getResourceByID(IntervalTimeType, 0);
       Resource* lastActivationTime = getResourceByID(LastActivationTimeType, 0);
       currentTime -> value.timeType = timeValue;
-      if (timeValue >= (lastActivationTime -> value.timeType + intervalTime -> value.timeType) ) {
+      if (timeValue - lastActivationTime -> value.timeType >= intervalTime -> value.timeType) {
         lastActivationTime -> value.timeType = timeValue;
         onInterval();
       }
