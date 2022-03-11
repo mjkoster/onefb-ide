@@ -56,6 +56,7 @@ class Resource {
     AnyValueType value;
 };
 
+
 /* Objects contain a collection of resources and some bound methods and chain into a linked list */
 /* Bound methods are extended for application function types */
 class Object {
@@ -75,7 +76,79 @@ class Object {
       firstObject = listFirstObject;
     };   
 
+    // Interface to create a new resource in this object
+    Resource* newResource(uint16_t type, uint16_t instance, ValueType vtype) {
+      // find last resource in the chain
+      if (NULL == firstResource) { // make first resource instance in the list and add to this object
+        this -> firstResource = new Resource(type, instance, vtype );
+        return firstResource;
+      }
+      else { // already have first resource
+        Resource* resource = firstResource;
+          while (resource -> nextResource != NULL) {
+            resource = resource -> nextResource;
+          };
+        // make instance and add the new resource to the list
+        resource -> nextResource = new Resource(type, instance, vtype );
+        return resource -> nextResource;
+      };
+    };
+
+    // Interfaces to select Resources and Objects by their IDs
+
+    // return a pointer to the first resource in this object that matches the type and instance
+    Resource* getResourceByID(uint16_t type, uint16_t instance) {
+      Resource* resource = firstResource;
+      while ( (resource != NULL) && (resource -> typeID != type || resource -> instanceID != instance) ) {
+        resource = resource -> nextResource;
+      };
+      return resource; // returns NULL if resource doesn't exist
+    };
+
+    // return a pointer to the first object in the Object list that matches the type and instance
+    Object* getObjectByID(uint16_t type, uint16_t instance) {
+      Object* object = firstObject;
+      while (object != NULL && (object -> typeID != type || object -> instanceID != instance)) {
+        object = object -> nextObject;
+      };
+      return object; // returns NULL if doesn't exist
+    };
+
+    // Value Interfaces
+    
+    // Interface to Update Value 
+
+    void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {
+      Resource* resource = getResourceByID(type, instance);
+      if (resource != NULL) {
+        resource -> value = value;
+      onValueUpdate(type, instance, value); // call the update handler
+      }
+      else {
+        printf("NULL in updateValueByID\n");
+      };
+    };
+
+    // Interface to Read Value
+
+    AnyValueType readValueByID(uint16_t type, uint16_t instance) {
+      Resource* resource = getResourceByID(type, instance);
+      AnyValueType returnValue;
+      if (resource != NULL) {
+        return resource -> value;
+      }
+      else {
+        printf ("NULL in readValueByID\n"); // should throw an error
+      return(returnValue); // returns uninitialized value union if there is no candidate
+      }
+    }; 
+    // Application logic extends this method
+    void onValueUpdate(uint16_t type, uint16_t instance, AnyValueType value) {}; 
+
     /* 
+
+    Flow Extension to the basic object model
+    
     Object state can be sync'ed (transferred from one object to another) using inputLinks
     or OutputLinks. InputLinks will cause a read operation to be performed on the linked 
     source object and the value used to set the state of this object (pull pattern). 
@@ -116,7 +189,7 @@ class Object {
       if (inputLink != NULL) {
         Object* sourceObject = getObjectByID(inputLink -> value.linkType.typeID, inputLink -> value.linkType.instanceID);
         updateDefaultValue(sourceObject -> onInputSync()); // call onInputSync of the source object to get dynamic values
-        onValueUpdate(); // call onValueUpdate to initiate local handling of the update 
+        onDefaultValueUpdate(); // call onValueUpdate to initiate local handling of the update 
       }
     }; 
 
@@ -140,74 +213,33 @@ class Object {
       }    
     }; 
 
-    // Value Interface
-
-    // Update CurrentTime value on Object and maybe call onInterval
-    void updateCurrentTime(time_t timeValue) {
-      // update current time
-      // interval time check is wrap-safe if time variable and HW timer both have uint32_t wrap behavior
-      // if(current time >= last activation time + interval time){ update last activation time and call onInterval }
-      Resource* currentTime = getResourceByID(CurrentTimeType, 0);
-      Resource* intervalTime = getResourceByID(IntervalTimeType, 0);
-      Resource* lastActivationTime = getResourceByID(LastActivationTimeType, 0);
-      currentTime -> value.timeType = timeValue;
-      if (timeValue >= (lastActivationTime -> value.timeType + intervalTime -> value.timeType) ) {
-        lastActivationTime -> value.timeType = timeValue;
-        onInterval();
-      }
-    }; 
-    
-    // Interface to Update Value 
-
-    void updateValueByID(uint16_t type, uint16_t instance, AnyValueType value) {
-      Resource* resource = getResourceByID(type, instance);
-      if (resource != NULL) {
-        resource -> value = value;
-      }
-      else {
-        printf("NULL in updateValueByID\n");
-      };
-    };
-
+    // extended interface for default value sync
     void updateDefaultValue(AnyValueType value) {
       // prioritized resource types, update value and call onUpdate
       Resource* resource = getResourceByID(InputValueType,0);
       if (resource != NULL) {
         resource -> value = value;
         //onValueUpdate(resource -> typeID, resource -> instanceID, value);
-        onValueUpdate();
+        onDefaultValueUpdate();
         return;
       };
       resource = getResourceByID(CurrentValueType,0);
       if (resource != NULL) {
         resource -> value = value;
-        onValueUpdate();
+        onDefaultValueUpdate();
         return;
       };
       resource = getResourceByID(OutputValueType,0);
       if (resource != NULL){
         resource -> value = value;
-        onValueUpdate();
+        onDefaultValueUpdate();
         return;
       };
-      printf("updateDefault couldn't find a candidate resource\n"); // should throw an error
+      printf("updateDefaultValue couldn't find a candidate resource\n"); // should throw an error
       return;
     }; 
 
-    // Interface to Read Value
-
-    AnyValueType readValueByID(uint16_t type, uint16_t instance) {
-      Resource* resource = getResourceByID(type, instance);
-      AnyValueType returnValue;
-      if (resource != NULL) {
-        return resource -> value;
-      }
-      else {
-        printf ("NULL in readValueByID\n");
-      return(returnValue); // returns uninitialized value union if there is no candidate
-      }
-    }; 
-    
+    // extended interface for default value sync
     AnyValueType readDefaultValue() {
       AnyValueType returnValue;
       Resource* resource = getResourceByID(OutputValueType,0);
@@ -222,51 +254,68 @@ class Object {
       if (resource != NULL){
         return(resource -> value);
       };
-      printf("readDefault couldn't find a candidate resource\n");
+      printf("readDefault couldn't find a candidate resource\n"); // should throw an error
       return(returnValue); // returns uninitialized value union if there is no candidate
     }; 
 
-    // Internal Interface, implements application logic
-    
+    /* 
+    Timer extension
+    */
+    // Update CurrentTime value on Object and maybe call onInterval
+    void updateCurrentTime(time_t timeValue) {
+      // update current time
+      // interval time check is wrap-safe if time variable and HW timer both have uint32_t wrap behavior
+      // if(current time >= last activation time + interval time){ update last activation time and call onInterval }
+      Resource* currentTime = getResourceByID(CurrentTimeType, 0);
+      Resource* intervalTime = getResourceByID(IntervalTimeType, 0);
+      Resource* lastActivationTime = getResourceByID(LastActivationTimeType, 0);
+      currentTime -> value.timeType = timeValue;
+      if (timeValue >= (lastActivationTime -> value.timeType + intervalTime -> value.timeType) ) {
+        lastActivationTime -> value.timeType = timeValue;
+        onInterval();
+      }
+    }; 
+
+    /*
+    Internal Interface, application logic is implemented by extending/overriding these methods
+    */
+
     // Handler for Timer Interval
     void onInterval() {}; 
 
-    // Handler for Value update from either input or output sync
-    //void onValueUpdate(uint16_t type, uint16_t instance, AnyValueType value) {}; 
-    void onValueUpdate() {}; 
+    // Handler for DefaultValue update, called from either input or output sync
+    void onDefaultValueUpdate() {}; 
 
     // Handler to return value in response to input sync from another object
     AnyValueType onInputSync() {
       return readDefaultValue(); // Default read value, override for e.g. gpio read
     }; 
+};
 
-    Resource* newResource(uint16_t type, uint16_t instance, ValueType vtype) {
-      // find last resource in the chain
-      if (NULL == firstResource) { // make first resource instance in the list and add to this object
-        this -> firstResource = new Resource(type, instance, vtype );
-        return firstResource;
+class ObjectList {
+  public:
+    // Linked list of Objects
+    Object* firstObject; // private?
+    // make a new object and add it to the list
+    Object* newObject(uint16_t type, uint16_t instance) {
+      // find the last object in the chain, has a null nextobject pointer
+      // FIXME check if it already exists?
+      if (NULL == firstObject) { // make first object and add to the list (sets property of the ObjectList)
+        this -> firstObject = new Object(type, instance, firstObject);
+        return firstObject;
       }
-      else { // already have first resource
-        Resource* resource = firstResource;
-          while (resource -> nextResource != NULL) {
-            resource = resource -> nextResource;
-          };
-        // make instance and add the new resource to the list
-        resource -> nextResource = new Resource(type, instance, vtype );
-        return resource -> nextResource;
-      };
+      else { // already have the first object, find the end of the list 
+        Object* object = firstObject;
+        while (object -> nextObject != NULL) {
+          object = object -> nextObject;
+        };
+        // make instance and add the new resource (sets property of the last Object)
+        object -> nextObject = new Object(type, instance, firstObject);
+        return object -> nextObject; 
+      };     
     };
 
-    // return a pointer to the first resource in this object that matches the type and instance
-    Resource* getResourceByID(uint16_t type, uint16_t instance) {
-      Resource* resource = firstResource;
-      while ( (resource != NULL) && (resource -> typeID != type || resource -> instanceID != instance) ) {
-        resource = resource -> nextResource;
-      };
-      return resource; // returns NULL if resource doesn't exist
-    };
-
-    // return a pointer to the first object in the Object list that matches the type and instance
+    // return a pointer to the first object that matches the type and instance
     Object* getObjectByID(uint16_t type, uint16_t instance) {
       Object* object = firstObject;
       while (object != NULL && (object -> typeID != type || object -> instanceID != instance)) {
@@ -274,42 +323,9 @@ class Object {
       };
       return object; // returns NULL if doesn't exist
     };
-};
-
-class ObjectList {
-  public:
-    // Linked list of Objects
-    Object* nextObject; // private?
-    // make a new object and add it to the list
-    Object* newObject(uint16_t type, uint16_t instance) {
-      // find the last object in the chain, has a null nextobject pointer
-      // FIXME check if it already exists?
-      if (NULL == nextObject) { // make first object and add to the list (sets property of the ObjectList)
-        this -> nextObject = new Object(type, instance, nextObject);
-        return nextObject;
-      }
-      else { // already have the first object, find the end of the list 
-        Object* object = nextObject;
-        while (object -> nextObject != NULL) {
-          object = object -> nextObject;
-        };
-        // make instance and add the new resource (sets property of the last Object)
-        object -> nextObject = new Object(type, instance, nextObject);
-        return object -> nextObject; 
-      };     
-    };
-
-    // return a pointer to the first object that matches the type and instance
-    Object* getObjectByID(uint16_t type, uint16_t instance) {
-      Object* object = nextObject;
-      while (object != NULL && (object -> typeID != type || object -> instanceID != instance)) {
-        object = object -> nextObject;
-      };
-      return object; // returns NULL if doesn't exist
-    };
 
     void displayObjects() {
-      Object* object = nextObject;
+      Object* object = firstObject;
       while ( object != NULL) {
         printf ( "[%d, %d]\n", object -> typeID, object -> instanceID);
         Resource* resource = object -> firstResource;
@@ -341,7 +357,7 @@ class ObjectList {
 
     // construct with an empty object list
     ObjectList() {
-      nextObject = NULL;
+      firstObject = NULL;
     };
 };
 
