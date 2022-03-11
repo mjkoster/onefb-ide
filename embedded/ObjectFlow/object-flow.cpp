@@ -205,12 +205,7 @@ class Object {
             object -> updateDefaultValue(value);
           };
         resource = resource -> nextResource;
-      };
- 
-      if (resource != NULL) {
-        //Object* object = 
-        //resource -> value.linkType.typeID;
-      }    
+      }; 
     }; 
 
     // extended interface for default value sync
@@ -277,7 +272,7 @@ class Object {
     }; 
 
     /*
-    Internal Interface, application logic is implemented by extending/overriding these methods
+    Internal Interface extension, application logic is implemented by extending/overriding these methods
     */
 
     // Handler for Timer Interval
