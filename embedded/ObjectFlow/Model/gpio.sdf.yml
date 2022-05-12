@@ -1,0 +1,199 @@
+---
+info: 
+  title: GPIO object definitions
+  version: "2022-03-25"
+  copyright: "Copyright 2021, 2022 Michael J. Koster. All rights reserved."
+  license: "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+
+namespace: 
+  flo: https://onedm.org/objectflow
+
+defaultnamespace: flo
+
+sdfData:
+  # add this ObjectType ID to the TypeID registry
+  TypeID:
+    ObjectType:
+      AnalogInput: { const: 43001 }
+      AnalogOutput: { const: 43002 }
+      BinaryInput: { const: 43003 }
+      BinaryOutput: { const: 43004 }
+    ResourceType:
+      PinID: { const: 27015}
+      Pullup: { const: 27016}
+
+sdfProperty:
+  GpioPinID: 
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/PinID }
+    flo:meta: 
+      ValueType: { sdfChoice: { IntegerType: {} } }
+    sdfChoice:
+      IntegerType: { default: 0 }
+
+  GpioPinPullup: 
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/Pullup }
+    flo:meta: 
+      ValueType: { sdfChoice: { BooleanType: {} } }
+    sdfChoice:
+      BooleanType: { default: false }
+    required: true
+    default: false
+
+sdfObject:
+  # Analog Input GPIO Object
+  AnalogInput:
+    sdfRef: /#/sdfObject/ObjectFlowObject
+    oma:id: { sdfRef: /#/sdfData/TypeID/ObjectType/AnalogInput }
+
+
+    # Analog Input Object Resources
+    sdfRequired:
+      - /#/sdfObject/AnalogInput/sdfProperty/CurrentTime
+      - /#/sdfObject/AnalogInput/sdfProperty/IntervalTime
+      - /#/sdfObject/AnalogInput/sdfProperty/LastActivationTime
+      - /#/sdfObject/AnalogInput/sdfProperty/PinID
+      - /#/sdfObject/AnalogInput/sdfProperty/CurrentValue
+
+    sdfProperty:
+
+      CurrentTime:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentTime
+        required: true
+ 
+      IntervalTime:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/IntervalTime
+        required: true
+
+      LastActivationTime:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/LastActivationTime
+        required: true
+
+      PinID: 
+        sdfRef: /#/sdfProperty/GpioPinID
+        required: true
+
+      Pullup: 
+        sdfRef: /#/sdfProperty/GpioPinPullup
+
+      CurrentValue:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentValue
+        flo:meta: 
+          ValueType: { sdfChoice: { IntegerType: {} } }
+        sdfChoice:
+          IntegerType: { default: 0 }
+        required: true
+
+      OutputLink:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/OutputLink
+
+    sdfAction:
+      OnInterval: sample the gpio pin and update CurrentValue, call syncToOutput
+
+  # Binary Input GPIO Object
+  BinaryInput:
+    sdfRef: /#/sdfObject/ObjectFlowObject
+    oma:id: { sdfRef: /#/sdfData/TypeID/ObjectType/BinaryInput }
+
+    # Binary Input Object Resources
+    sdfRequired:
+      - /#/sdfObject/BinaryInput/sdfProperty/CurrentTime
+      - /#/sdfObject/BinaryInput/sdfProperty/IntervalTime
+      - /#/sdfObject/BinaryInput/sdfProperty/LastActivationTime
+      - /#/sdfObject/BinaryInput/sdfProperty/PinID
+      - /#/sdfObject/BinaryInput/sdfProperty/CurrentValue
+
+    sdfProperty:
+
+      CurrentTime:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentTime
+        required: true
+ 
+      IntervalTime:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/IntervalTime
+        required: true
+
+      LastActivationTime:
+        required: true
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/LastActivationTime
+
+      PinID: 
+        sdfRef: /#/sdfProperty/GpioPinID
+        required: true
+
+      Pullup: 
+        sdfRef: /#/sdfProperty/GpioPinPullup
+
+      CurrentValue:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentValue
+        flo:meta: 
+          ValueType: { sdfChoice: { BooleanType: {} } }
+        sdfChoice:
+          BooleanType: { default: false }
+        required: true
+
+      OutputLink:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/OutputLink
+
+    sdfAction:
+      OnInterval: sample the gpio pin and update CurrentValue, call syncToOutput
+
+  # Analog Output GPIO Object
+  AnalogOutput:
+    sdfRef: /#/sdfObject/ObjectFlowObject
+    oma:id: { sdfRef: /#/sdfData/TypeID/ObjectType/AnalogOutput }
+
+    # Analog Output Object Resources
+    sdfRequired:
+      - /#/sdfObject/AnalogOutput/sdfProperty/PinID
+      - /#/sdfObject/AnalogOutput/sdfProperty/CurrentValue
+    sdfProperty:
+
+      PinID: 
+        sdfRef: /#/sdfProperty/GpioPinID
+        required: true
+
+      Pullup: 
+        sdfRef: /#/sdfProperty/GpioPinPullup
+
+      CurrentValue:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentValue
+        flo:meta: 
+          ValueType: { sdfChoice: { IntegerType: {} } }
+        sdfChoice:
+          IntegerType: { default: 0 }
+        required: true
+
+    sdfAction:
+      OnDefaultValueUpdate: update the state of the gpio pin 
+
+  # Binary Output GPIO Object
+  BinaryOutput:
+    sdfRef: /#/sdfObject/ObjectFlowObject
+    oma:id: { sdfRef: /#/sdfData/TypeID/ObjectType/BinaryOutput }
+
+    # Binary Output Object Resources
+    sdfRequired:
+      - /#/sdfObject/BinaryOutput/sdfProperty/PinID
+      - /#/sdfObject/BinaryOutput/sdfProperty/CurrentValue
+    sdfProperty:
+
+      PinID: 
+        sdfRef: /#/sdfProperty/GpioPinID
+        required: true
+
+      Pullup: 
+        sdfRef: /#/sdfProperty/GpioPinPullup
+
+      CurrentValue:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentValue
+        flo:meta: 
+          ValueType: { sdfChoice: { BooleanType: {} } }
+        sdfChoice:
+          BooleanType: { default: false }
+        required: true
+
+    sdfAction:
+      OnDefaultValueUpdate: 
+        description: update the state of the gpio pin 

@@ -1,0 +1,330 @@
+---
+info: 
+  title: ObjectFlow models common definitions 
+  version: "2022-03-25"
+  copyright: "Copyright 2021, 2022 Michael J. Koster. All rights reserved."
+  license: "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+
+namespace: 
+  flo: https://onedm.org/ecosystem/objectflow
+  oma: "https://onedm.org/ecosystem/oma"
+
+defaultnamespace: flo
+
+# This definition is a template for ObjectFlow application objects, and is matched with underlying embedded code libraries that implement ObjectFlow on the supported target platforms. 
+
+# Application object types are identified by TypeID and extend this definition by providing resource definitions and the underlying embedded code implementations of the necessary handler types.
+
+# ObjectFLow application nodes are constructed from this template and the application object definitions, and then used to automatically generate the instance graph for the target platform.
+
+# An ObjectFlow application consists of a directed graph of application objects connected by input and output links, which communicate state and time updates. 
+
+# common data types
+
+sdfData:
+
+  flo:meta:
+    description: metadata schema extension for ObjectFlow metadata in sdfThing, sdfObject, or sdfProperty definitions
+    TypeID:
+      sdfRef: /#/sdfData/IDRange
+    InstanceID:
+      sdfRef: /#/sdfData/IDRange
+    ValueType:
+      sdfRef: /#/sdfData/ValueType
+    InstanceGraphLink:
+      sdfRef: /#/sdfData/SdfLink
+
+  oma:id:
+    description: OMA type ID metadata for Object and Resource application types
+    sdfRef: /#/sdfData/IDRange
+
+  SdfLink: 
+    type: object
+    properties: 
+      InstancePointer: 
+        # JSON Pointer to the object instance definition to make an application link to
+        type: string
+      InstanceType:
+        # Optional JSON Pointer to the object type definition to require in the InstancePointer resolution path
+        type: string
+      
+  UnsignedInt32: 
+    type: integer
+    minimum: 0
+    maximum: 4294967295
+      
+  Value:
+    description: Data types to represent ObjectFlow values
+    sdfChoice:
+      BooleanType: { type: boolean }
+      IntegerType: { type: integer }
+      FloatType: { type: float }
+      StringType: { type: string }
+      ValueTypeType: { sdfRef: /#/sdfData/ValueType }
+      TimeType: { sdfRef: /#/sdfData/UnsignedInt32 }
+      InstanceLinkType: { sdfRef: "#/sdfData/InstanceLinkData" }
+      SemanticType: { sdfRef: "#/sdfData/SemanticType" } 
+
+  ValueType:
+    description: Metadata for applications to test for unknown data type
+    sdfChoice:
+      # let the underlying implementation choose its own internal enum coding, need a binding to names or values
+      BooleanType: { default: BooleanType }
+      IntegerType: { default: IntegerType }
+      FloatType: { default: FloatType }
+      StringType: { default: StringType }
+      ValueTypeType: { default: ValueTypeType }
+      TimeType: { default: TimeType }
+      InstanceLinkType: { default: InstanceLinkType }
+      SemanticType: { default: SemanticType }
+
+  #  binding to ObjectFlow C++ types 
+  # union AnyValueType {
+  #   bool booleanType;
+  #   int integerType;
+  #   double floatType;
+  #   char* stringType;
+  #   InstanceLink linkType;
+  #   time_t timeType;
+  # };
+  ValueTypeString: 
+    sdfRef: /#/sdfData/ValueType
+    sdfChoice:
+      BooleanType: { const: booleanType }
+      IntegerType: { const: integerType }
+      FloatType: { const: floatType }
+      StringType: { const: stringType }
+      ValueTypeType: { const: }
+      TimeType: { const: timeType }
+      InstanceLinkType: { const: linkType }
+      SemanticType: { const: }
+
+  IDRange:
+    description: integer ID for the object and resource addressing and selection scheme (LWM2M)
+    type: integer
+    minimum: 0
+    maximum: 65535
+
+  InstanceLinkData:
+    description: Data type to represent a selector of an ObjectFlow object or resource instance , for application use (LWM2M Object Link, also a resource link within an object )
+    type: object
+    properties: 
+      TypeID:
+        sdfRef: /#/sdfData/IDRange
+      InstanceID:
+        sdfRef: /#/sdfData/IDRange
+        default: 0 
+
+  SemanticType:
+    description: Any type is allowed, eventually a registry of named data schemas and corresponding struct definitions
+    type: object
+    properties: 
+      TypeName: { type: string }
+      DataSchema: { type: object }
+  # Example:
+  # { 
+  #  TypeName: RgbColorData
+  #  DataSchema:
+  #    type: object
+  #    properties:
+  #      red: { type: integer, minimum: 0, maximum: 255 }
+  #      green: { type: integer, minimum: 0, maximum: 255 }
+  #      blue: { type: integer, minimum: 0, maximum: 255 }
+  #
+  #  struct RgbColorData {
+  #    uint8_t red;
+  #    uint8_t green;
+  #    uint8_t blue;
+  #  };
+  #
+
+  TypeID:
+    ObjectType: {}
+    ResourceType:
+      ValueType: { const: 27000}
+      CurrentValue: { const: 27001 }
+      InputValue: { const: 27002 }
+      OutputValue: { const: 27003 }
+      InputLink: { const: 27004 }
+      OutputLink: { const: 27005 }
+      CurrentTime: { const: 27006 }
+      IntervalTime: { const: 27007 }
+      LastActivationTime: { const: 27008 }
+
+
+sdfProperty:
+
+  # Template for ObjectFlow Resource class
+  ObjectFlowResource:
+    description: definitions for the properties of an ObjectFlow Resource
+    sdfRef: /#/sdfData/Value # a resource is also a data value
+    flo:meta: 
+      ValueType:
+        sdfRef: /#/sdfData/ValueType 
+        required: true
+
+  # Reusable sdfProperty types for Resources
+  ValueType:
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/ValueType/const }
+    flo:meta: 
+      ValueType: { sdfRef: /#/sdfData/ValueType/sdfChoice/ValueTypeType }
+    type: { sdfRef: /#/sdfData/ValueType }
+    sdfChoice:
+      ValueTypeType: {}
+
+  CurrentValue:
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/CurrentValue }
+
+  InputValue:
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/InputValue }
+
+  OutputValue:
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/OutputValue }
+
+  InputLink:
+    description: Link to another object for obtaining an input or present value from an output or present value
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    type: { sdfRef: /#/sdfData/Value/sdfChoice/InstanceLinkType }
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/InputLink }
+    flo:meta: 
+      ValueType: { sdfRef: /#/sdfData/ValueType }
+      InstanceGraphLink: { sdfRef: /#/sdfData/SdfLink }
+    sdfChoice:
+      InstanceLinkType: { sdfRef: "#/sdfData/InstanceLinkData" }
+
+  OutputLink:
+    description: Link to another object for updating an input or present value from an output or present value
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    type: { sdfRef: /#/sdfData/Value/sdfChoice/InstanceLinkType }
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/OutputLink }
+    flo:meta: 
+      ValueType: { sdfRef: /#/sdfData/ValueType/sdfChoice/InstanceLinkType }
+      InstanceGraphLink: { sdfRef: /#/sdfData/SdfLink }
+    sdfChoice:
+      InstanceLinkType: { sdfRef: "#/sdfData/InstanceLinkData" }
+
+  CurrentTime:
+    description: Time value updated from the timer service
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    type: { sdfRef: /#/sdfData/Value/sdfChoice/TimeType }
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/CurrentTime }
+    flo:meta: 
+      ValueType: { sdfRef: /#/sdfData/ValueType/sdfChoice/TimeType }
+    sdfChoice:
+      TimeType: { default: 0 }
+
+  IntervalTime:
+    description: Time value between activations
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    type: { sdfRef: /#/sdfData/Value/sdfChoice/TimeType }
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/IntervalTime }
+    flo:meta: 
+      ValueType: { sdfRef: /#/sdfData/ValueType/sdfChoice/TimeType }
+    sdfChoice:
+      TimeType: { default: 0 }
+
+  LastActivationTime:
+    description: Time value when the last activatoin occurred
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    type: { sdfRef: /#/sdfData/Value/sdfChoice/TimeType }
+    oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/LastActivationTime }
+    flo:meta: 
+      ValueType: { sdfRef: /#/sdfData/ValueType/sdfChoice/TimeType }
+    sdfChoice:
+      TimeType: { default: 0 }
+
+sdfObject:
+
+  # Template for ObjectFlow Object class
+  ObjectFlowObject:
+    description: definitions common to all objects in the ObjectFlow framework
+    # ObjectFlow Resources are sdfProperty within ObjectFlow Objects and wrap exposed state
+
+    sdfProperty: 
+
+      DefaultValueType:
+        sdfRef: /#/sdfProperty/ValueType
+
+      CurrentValue:
+        sdfRef: /#/sdfProperty/CurrentValue
+
+      InputValue:
+        sdfRef: /#/sdfProperty/InputValue
+
+      OutputValue:
+        sdfRef: /#/sdfProperty/OutputValue
+
+      InputLink:
+        description: Link to another object for obtaining a value from on syncFromInputLink
+        sdfRef: /#/sdfProperty/InputLink
+        minItems: 0
+
+      OutputLink:
+        description: Link to another object for updating on syncToOutputLink
+        sdfRef: /#/sdfProperty/OutputLink
+        minItems: 0
+
+      CurrentTime:
+        description: Time value updated from the timer service
+        sdfRef: /#/sdfProperty/CurrentTime
+
+      IntervalTime:
+        description: Time value between activations
+        sdfRef: /#/sdfProperty/IntervalTime
+
+      LastActivationTime:
+        sdfRef: /#/sdfProperty/LastActivationTime
+        description: Time value when the last activation occurred
+
+    # ObjectFlow internal logic and communication handlers are defined as sdfAction types
+    sdfAction:
+
+      SyncFromInputLink:
+        description: Copy the default value of the object selected by the input link to the default value of this object. The default source value is determined by priority ranking of Output Value, Current Value, Input Value. The default destination value is selected by priority ranking of Input Value, Current Value, Output Value.
+
+      SyncToOutputLink:
+        description: Copy the default value of this object to the default value of the object selected by the output link. The default source value is determined by priority ranking of Output Value, Current Value, Input Value. The default destination value is selected by priority ranking of Input Value, Current Value, Output Value.
+
+      SyncMultiInputs:
+        description: Copy the default values from objects selected by one or more instances of Input Link, to corresponding instances of Default Values, selected by matching Instance ID from each Input Link to the Instance ID of the corresponding Default Value. Only one default value will be selected for each instance number.
+
+      SyncMultiOutputs:
+        description: Copy values from Default Value instances to Default Values in corresponding objects pointed to by Output Link instances, selected by matching Output Link instance numbers with Default value instance numbers. ONly one default value will be selected for each Output Link.
+
+      SyncMultiFromMulti:
+        description: Pull pattern sync of multiple default values from one object to another, matching all instance numbers and default values as in SyncMultipleInputs and SyncMultipleOutputs.
+
+      SyncMultiToMulti:
+        description: Push pattern sync of multiple default values from one object to another, matching all instance numbers and default values as in SyncMultipleInputs and SyncMultipleOutputs.
+
+      UpdateCurrentTime:
+        description: update the current time value of the CurrentTime resource from a value from a time source and see if the interval has elapsed for the next activation to take place. If the activation time is reached, call the OnInterval Action. if (CurrentTime - LastActivationTime >= IntervalTime) then call OnInterval. This is wrap-around safe and will work as an unconditional trigger if IntervalTime is set at 0 with constant or increasing time value, including all 0 values.
+
+      ReadDefaultValue:
+        description: Operation used to obtain the default value for use by internal application logic and external sync operations.
+
+      UpdateDefaultValue:
+        description: Operation used to update the default value for use by internal application logic and external sync operations.
+
+      OnInputSync:
+        description: Handler to return the default value to another object in response to SyncFromInputLink. Normalli to would return the Default Value but can be used to retun GPIO pin state, etc.
+
+      OnValueUpdate: 
+        description: Handler for application processing of value updates resulting from sync operations.
+
+      OnInterval:
+        description: Handler for timer interval application trigger
+
+  # sdfThing definition for the Object List
+sdfThing:
+  ObjectList:
+    sdfObject: 
+      <object>:
+        sdfRef: /sdfObject/ObjectFlowObject
+        minItems: 0
+  Flow:
+    sdfRef: /sdfThing/ObjectList

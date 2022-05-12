@@ -1,0 +1,122 @@
+---
+info: 
+  title: Value Mapping object 
+  version: "2022-03-25"
+  copyright: "Copyright 2021, 2022 Michael J. Koster. All rights reserved."
+  license: "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+
+namespace: 
+  flo: https://onedm.org/objectflow
+
+defaultnamespace: flo
+
+sdfData:
+  # add this ObjectType ID to the TypeID registry
+  TypeID:
+    ObjectType:
+      ValueMap: { const: 43010 }
+    ResourceType:
+      InputLowReference: { const: 27008 }
+      InputHighReference: { const: 27009 }
+      CurrentLowReference: { const: 27010 }
+      CurrentHighReference: { const: 27011 }
+      CurrentValueMinimum: { const: 27012 }
+      CurrentValueMaximum: { const: 27013 }
+      Unit: { const: 27014 }
+
+sdfProperty:
+  FloatValue:
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    flo:meta: 
+      ValueType: { sdfChoice: { FloatType: {} } }
+    sdfChoice:
+      FloatType: { default: 0 } 
+
+  # Unit Resource, to indicate engineering unit, using the senML unit system
+  Unit:
+    sdfRef: /#/sdfProperty/ObjectFlowResource
+    flo:meta: 
+      ValueType: { sdfChoice: { StringType: {} } }
+    sdfChoice:
+      StringType: { default: "no-unit" }
+
+# ValueMap Object
+sdfObject:
+  ValueMap:
+    sdfRef: /#/sdfObject/ObjectFlowObject
+    oma:id: { sdfRef: /#/sdfData/TypeID/ObjectType/ValueMap }
+
+    # ValueMap Object Resources
+    sdfRequired:
+      - /#/sdfObject/ValueMap/sdfProperty/InputValue
+      - /#/sdfObject/ValueMap/sdfProperty/CurrentValue
+      - /#/sdfObject/ValueMap/sdfProperty/InputLowReference
+      - /#/sdfObject/ValueMap/sdfProperty/InputHighReference
+      - /#/sdfObject/ValueMap/sdfProperty/CurrentLowReference
+      - /#/sdfObject/ValueMap/sdfProperty/CurrentHighReference
+      - /#/sdfObject/ValueMap/sdfProperty/CurrentValueMinimum
+      - /#/sdfObject/ValueMap/sdfProperty/CurrentValueMaximum
+      - /#/sdfObject/ValueMap/sdfProperty/CurrentValueUnit
+
+    sdfProperty:
+      InputValue:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/InputValue
+        flo:meta: 
+          ValueType: { sdfChoice: { IntegerType: {} } }
+        sdfChoice:
+          IntegerType: { default: 0 }
+        required: true
+
+      CurrentValue:
+        sdfRef: /#/sdfObject/ObjectFlowObject/sdfProperty/CurrentValue
+        flo:meta: 
+          ValueType: { sdfChoice: { FloatType: {} } }
+        sdfChoice:
+          FloatType: { default: 0 }
+        required: true
+
+      InputLowReference:
+        sdfRef: /#/sdfProperty/FloatValue
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/InputLowReference }
+        required: true
+
+      InputHighReference:
+        sdfRef: /#/sdfProperty/FloatValue
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/InputHighReference }
+        required: true
+
+      CurrentLowReference:
+        sdfRef: /#/sdfProperty/FloatValue
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/CurrentLowReference }
+        required: true
+
+      CurrentHighReference:
+        sdfRef: /#/sdfProperty/FloatValue
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/CurrentHighReference }
+        required: true
+
+      CurrentValueMinimum:
+        sdfRef: /#/sdfProperty/FloatValue
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/CurrentValueMinimum }
+        required: true
+
+      CurrentValueMaximum:
+        sdfRef: /#/sdfProperty/FloatValue
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/CurrentValueMaximum }
+        required: true
+        
+      CurrentValueUnit:
+        sdfRef: /#/sdfProperty/Unit
+        oma:id: { sdfRef: /#/sdfData/TypeID/ResourceType/Unit }
+        required: true
+
+
+    sdfAction:
+      OnDefaultValueUpdate: 
+        description:
+          "Apply the dual slope-intercept conversion:
+          CurrentValue = 
+              ( InputValue - InputLowScale ) 
+              * ( CurrentHighScale - CurrentLowScale ) / ( InputHighScale - InputLowScale )
+              - CurrentLowScale
+          clip the value between minimum and maximum, inclusive, update CurrentValue, call SyncToOutput"
